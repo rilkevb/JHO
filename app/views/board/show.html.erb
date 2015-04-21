@@ -1,2 +1,14 @@
-<h1>Board#show</h1>
-<p>Find me in app/views/board/show.html.erb</p>
+<div class="container">
+  <% if @board %>
+  <h1>@board.name</h1>
+  <% @board.lists.each do |list| %>
+  <div class="list">
+    <div class="card">
+      <p>This is a card<./p>
+    </div>
+  </div>
+  <% end %>
+  <% else %>
+  <p>Sorry, you have no boards yet.</p>
+  <% end %>
+</div>
