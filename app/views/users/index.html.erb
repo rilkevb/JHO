@@ -1,0 +1,7 @@
+<% if @user %>
+<p>
+  Hi <%= @user.name %>!
+</p>
+<% else %>
+<p>Nobody is logged in. Use the search bar to manually manipulate the params.</p>
+<% end %>
