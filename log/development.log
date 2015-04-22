@@ -1984,3 +1984,39 @@ Processing by BoardsController#show as HTML
   [1m[36mCard Load (0.3ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 2]]
   Rendered boards/show.html.erb within layouts/application (2.9ms)
 Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-22 10:20:07 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (29.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 353ms (Views: 341.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2015-04-22 10:23:48 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (17.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 112ms (Views: 24.8ms | ActiveRecord: 44.1ms)
+
+
+Started GET "/users/1/boards" for 127.0.0.1 at 2015-04-22 10:23:51 -0700
+Processing by BoardsController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mBoard Load (20.2ms)[0m  SELECT "boards".* FROM "boards" WHERE "boards"."user_id" = $1  [["user_id", 1]]
+  Rendered boards/index.html.erb within layouts/application (32.8ms)
+Completed 200 OK in 146ms (Views: 39.4ms | ActiveRecord: 21.5ms)
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-04-22 10:23:53 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mBoard Load (0.2ms)[0m  SELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mList Load (15.9ms)[0m  [1mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1[0m  [["board_id", 1]]
+  [1m[35mCard Load (20.3ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 1]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 2]]
+  Rendered boards/show.html.erb within layouts/application (116.5ms)
+Completed 200 OK in 155ms (Views: 107.3ms | ActiveRecord: 39.7ms)
