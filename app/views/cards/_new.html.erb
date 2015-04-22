@@ -7,10 +7,11 @@
 <ul>
   <% @card.errors.full_messages.each do |msg| %>
   <li class="error-message"><%= msg %></li>
+  <% end %>
 </ul>
 <% end %>
-<p> <%= f.label :name %> </p>
-<p><%= f.text_field :name, placeholder: 'name' %></p>
+<p> <%= f.label :organization_name %> </p>
+<p><%= f.text_field :organization_name, placeholder: 'organization name' %></p>
 <p>
   <%= f.submit "Add card" %>
 </p>
