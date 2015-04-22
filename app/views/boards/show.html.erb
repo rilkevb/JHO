@@ -1,19 +1,31 @@
+
+<style type="text/css">
+  .list {
+    display: inline-table ;
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    margin-left: 20px;
+    border: 2px black solid;
+  }
+</style>
+
 <div class="container">
   <% if @board %>
-  <h2><%= @board.name %></h1>
+    <h2><%= @board.name %></h1>
     <% if @board.lists %>
-    <% @board.lists.each do |list| %>
-    <div class="list">
-      <h3><%= list.name  %></h3>
-      <% list.cards.each do |card| %>
-      <div class="card">
-        <p><%= card.organization_name  %></p>
-      </div>
+      <% @board.lists.each do |list| %>
+        <div class="list" id="<%= list.id %>">
+          <h3><%= list.name  %></h3>
+          <% list.cards.each do |card| %>
+            <div class="card">
+              <p><%= card.organization_name  %></p>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-    </div>
     <% end %>
-    <% end %>
-    <% else %>
+  <% else %>
     <p>Sorry, you have no boards yet.</p>
-    <% end %>
-  </div>
+  <% end %>
+</div>
