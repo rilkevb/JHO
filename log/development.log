@@ -3720,3 +3720,38 @@ Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde45
 
 
 Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-04-22 12:02:42 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (2.4ms)[0m  [1mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Matt"], ["created_at", "2015-04-22 19:24:57.263950"], ["updated_at", "2015-04-22 19:24:57.263950"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "boards" ("name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Software Developer Job Hunt"], ["user_id", 1], ["created_at", "2015-04-22 19:24:57.281512"], ["updated_at", "2015-04-22 19:24:57.281512"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mBoard Load (0.4ms)[0m  [1mSELECT  "boards".* FROM "boards"  ORDER BY "boards"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (2.5ms)[0m  [1mINSERT INTO "lists" ("board_id", "name", "position_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["board_id", 1], ["name", "Organizations of Interest"], ["position_id", 1], ["created_at", "2015-04-22 19:24:57.295475"], ["updated_at", "2015-04-22 19:24:57.295475"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT  "boards".* FROM "boards"  ORDER BY "boards"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "lists" ("board_id", "name", "position_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["board_id", 1], ["name", "Looking for Advocate"], ["position_id", 2], ["created_at", "2015-04-22 19:24:57.301093"], ["updated_at", "2015-04-22 19:24:57.301093"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT  "boards".* FROM "boards"  ORDER BY "boards"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "lists" ("board_id", "name", "position_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["board_id", 1], ["name", "Meeting Advocate"], ["position_id", 3], ["created_at", "2015-04-22 19:24:57.303334"], ["updated_at", "2015-04-22 19:24:57.303334"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["list_id", 1], ["organization_name", "Google"], ["created_at", "2015-04-22 19:24:57.316027"], ["updated_at", "2015-04-22 19:24:57.316027"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["list_id", 1], ["organization_name", "ZenPayroll"], ["created_at", "2015-04-22 19:24:57.318396"], ["updated_at", "2015-04-22 19:24:57.318396"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["list_id", 2], ["organization_name", "Adobe"], ["created_at", "2015-04-22 19:24:57.319969"], ["updated_at", "2015-04-22 19:24:57.319969"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["list_id", 2], ["organization_name", "Facebook"], ["created_at", "2015-04-22 19:24:57.321479"], ["updated_at", "2015-04-22 19:24:57.321479"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["list_id", 3], ["organization_name", "Umbrella Corp"], ["created_at", "2015-04-22 19:24:57.322991"], ["updated_at", "2015-04-22 19:24:57.322991"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m

@@ -20,6 +20,7 @@
           <% list.cards.each do |card| %>
             <div class="card">
               <p><%= card.organization_name  %></p>
+              <%= render 'cards/new' %>
             </div>
           <% end %>
         </div>

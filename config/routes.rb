@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     resources :boards do
     end
   end
+  resource :lists do
+  end
+  resources :cards do
+  end
 
   # resources :products
 

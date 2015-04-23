@@ -1,0 +1,19 @@
+<div class="add-card">
+<%= form_for(@card) do |f| %>
+<% if @card.errors.any?  %>
+<p class="error-warning">
+  <%= pluralize(@card.errors.count, "error") %> prohibited this card from being created:
+</p>
+<ul>
+  <% @card.errors.full_messages.each do |msg| %>
+  <li class="error-message"><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<p> <%= f.label :organization_name %> </p>
+<p><%= f.text_field :organization_name, placeholder: 'organization name' %></p>
+<p>
+  <%= f.submit "Add card" %>
+</p>
+<% end %>
+</div>
