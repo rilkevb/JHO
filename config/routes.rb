@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'cards/create'
+
+  get 'cards/destroy'
+
   # get 'users/new'
   # post 'users/'
   # get 'users/destroy'
@@ -20,12 +24,13 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :users do
     resources :boards do
+      resources :lists do
+        resources :cards
+      end
     end
   end
-  resource :lists do
-  end
-  resources :cards do
-  end
+
+
 
   # resources :products
 

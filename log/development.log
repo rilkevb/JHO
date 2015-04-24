@@ -4267,3 +4267,38 @@ Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde4
 
 
 Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-04-24 14:53:48 -0700
+
+
+Started GET "/users/1/boards/1" for ::1 at 2015-04-24 15:15:58 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mList Load (0.3ms)[0m  SELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1  [["board_id", 1]]
+  Rendered cards/_new.html.erb (29.0ms)
+  Rendered boards/show.html.erb within layouts/application (30.0ms)
+Completed 500 Internal Server Error in 143ms (ActiveRecord: 6.4ms)
+
+ActionView::Template::Error (undefined method `cards_path' for #<#<Class:0x007fe1ee802898>:0x007fe1ee81b050>):
+    1: <div class="add-card">
+    2: <%= form_for(@card) do |f| %>
+    3: <% if @card.errors.any?  %>
+    4: <p class="error-warning">
+    5:   <%= pluralize(@card.errors.count, "error") %> prohibited this card from being created:
+  app/views/cards/_new.html.erb:2:in `_app_views_cards__new_html_erb__3642770538794282101_70304157364080'
+  app/views/boards/show.html.erb:11:in `block in _app_views_boards_show_html_erb___1997758442574116542_70304130800940'
+  app/views/boards/show.html.erb:7:in `_app_views_boards_show_html_erb___1997758442574116542_70304130800940'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.1ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (33.7ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (20.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (59.7ms)
