@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   # Example resource route with options:
   #   resources :products do
   #     member do
-  #       get 'short'
+  #       ge`````t 'short'
   #       post 'toggle'
   #     end
   #
