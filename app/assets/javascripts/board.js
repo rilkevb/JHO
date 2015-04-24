@@ -10,14 +10,16 @@ function bindEvents() {
 function addNewCard(event) {
   event.preventDefault();
   var that = this;
-  debugger;
   $.ajax( {
     url: that.action,
     type: "POST",
     data: {organization_name: $(that).children()[0].value}
   }).done( function(response) {
     console.log("done :", response)
-    // addCardToDOM(response)
+    var newCard = "<li class='ui-state-default' id='card" + response.id + "'>" +
+                response.organization_name +
+              "</li>"
+    $('.list#1').children('ul').append(newCard);
   }).fail( function(response) {
     console.log("failed :", response)
   });
