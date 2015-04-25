@@ -8,8 +8,12 @@ class CardsController < ApplicationController
     # @card = Card.new(card_params)
     @card = Card.new(list_id: 1, organization_name: params[:organization_name])
     if @card.save
-      render json: @card
+      # render json: @card
+      #This is returning to http://localhost:3000/users/1/boards/1/lists/1/cards
+      #Rather than http://localhost:3000/users/1/boards/1
+      redirect_to :back #json: @card
     else
+      #Need to add validation to prevent nill card being created...
       render json: { error: "card failed to create"}
     end
   end
