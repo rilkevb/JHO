@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 describe Card do
-  context 'valid Card' do
-    it 'is valid with '
-    it 'is invalid '
+  context 'associations' do
+    it { should belong_to(:list) }
+    it { should have_many(:movements) }
   end
 
-  context 'invalid Card' do
-    it 'is invalid without '
-
-    it 'is invalid with '
-  end
+  context 'valid Card'
+  context 'invalid Card'
 end
