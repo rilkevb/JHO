@@ -1,6 +1,6 @@
 class CreateMovements < ActiveRecord::Migration
   def change
-    create_table :movement_logs do |t|
+    create_table :movements do |t|
       t.string :current_list
       t.integer :card_id
 

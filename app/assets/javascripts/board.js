@@ -6,7 +6,7 @@ $(document).ready(function() {
 function bindEvents() {
   $(".add-card").on("submit", "form", addNewCard);
   // mouse down listener
-  $('.list').mouseup(".card", findCardId);
+  $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} )
 }
 
@@ -23,7 +23,9 @@ function addNewCard(event) {
     var newCard = "<li class='ui-state-default' id='card" + response.id + "'>" +
                 response.organization_name +
               "</li>"
-    $('.list#1').children('ul').append(newCard);
+    // debugger;
+    $('#sortable1').append(newCard)
+    // $('.list#1.card-container').children('ul').append(newCard);
   }).fail( function(response) {
     console.log("failed :", response)
   });
@@ -39,9 +41,9 @@ function findListId(event) {
   var listId = that.id;
   var boardId =  $('.board').attr('id');
 
-  debugger;
+  // debugger;
   $.ajax( {
-    url: "users/1/boards/" + boardId + "/lists/" + listId + "cards/" + cardId,
+    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId,
     type: "PUT",
     data: {list_id: listId, card_id: cardId, board_id: boardId}
   }).done(function(response) {

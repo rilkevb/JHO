@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150421223511) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "movement_logs", force: :cascade do |t|
+  create_table "movements", force: :cascade do |t|
     t.string   "current_list"
     t.integer  "card_id"
     t.datetime "created_at",   null: false

@@ -2,11 +2,26 @@ class CardsController < ApplicationController
   def create
     p params
     # @card = Card.new(card_params)
-    @card = Card.new(list_id: params[:list_id], organization_name: params[:organization_name])
+    @card = Card.new(list_id: 1, organization_name: params[:organization_name])
     if @card.save
       render json: @card
     else
       render json: { error: "card failed to create"}
+    end
+  end
+
+  def update
+    @card = Card.find_by(id: params[:card_id])
+    @card.list_id = params[:list_id]
+    if @card.save
+      @movement = @card.movements.new(current_list: params[:list_id], card_id: @card.id)
+      if @movement.save
+        render nothing: true
+      else
+        # movement fail
+      end
+    else
+      # card save fail
     end
   end
 
