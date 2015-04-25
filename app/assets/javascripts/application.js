@@ -18,9 +18,9 @@
 
 
 
-$(function() {
-    $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  });
+// $(function() {
+//     $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
+//       connectWith: ".connectedSortable",
+//       placeholder: "ui-state-highlight"
+//     }).disableSelection();
+//   });
