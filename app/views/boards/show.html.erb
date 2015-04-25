@@ -1,32 +1,28 @@
 
-<style type="text/css">
-  .list {
-    display: inline-table ;
-    width: 200px;
-    height: 200px;
-    margin-right: 20px;
-    margin-left: 20px;
-    border: 2px black solid;
-  }
-</style>
 
-<div class="container">
-  <% if @board %>
-    <h2><%= @board.name %></h1>
+<% if @board %>
+  <h2><%= @board.name %></h2>
+  <div class="board" id="<%= @board.id %>">
     <% if @board.lists %>
       <% @board.lists.each do |list| %>
         <div class="list" id="<%= list.id %>">
           <h3><%= list.name  %></h3>
-          <% list.cards.each do |card| %>
-            <div class="card">
-              <p><%= card.organization_name  %></p>
+            <% if list.id == 1 %>
               <%= render 'cards/new' %>
-            </div>
-          <% end %>
+            <% end %>
+          <div class="card-container">
+            <ul id="sortable<%= list.id %>" class="connectedSortable">
+              <% list.cards.each do |card| %>
+                <li class="ui-state-default" class="card" id="card<%= card.id %>">
+                  <%= card.organization_name  %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       <% end %>
     <% end %>
-  <% else %>
-    <p>Sorry, you have no boards yet.</p>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <p>Sorry, you have no boards yet.</p>
+<% end %>
