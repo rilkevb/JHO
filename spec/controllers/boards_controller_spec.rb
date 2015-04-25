@@ -48,52 +48,33 @@ RSpec.describe BoardsController, :type => :controller do
 
   describe "GET #show" do
     it "responds successfully with an HTTP 200 status code" do
-      p user
-      p board_1
-      p list_1
-      p card_1
-      p card_8
+      list_1
       get :show, { :id => board_1.id, :user_id => user.id  }
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
 
     it "renders the show template" do
-      p user
-      p board_1
-      p list_1
-      p card_1
-      p card_8
+      list_1
       get :show, { :id => board_1.id, :user_id => user.id  }
       expect(response).to render_template("show")
     end
 
     it "finds and loads the current user" do
-      p user
-      p board_1
-      p list_1
-      p card_1
-      p card_8
+      list_1
       get :show, { :id => board_1.id, :user_id => user.id  }
       expect(assigns(:user)).to match(user)
     end
 
     it "finds and loads the current board" do
-      p user
-      p board_1
-      p list_1
-      p card_1
-      p card_8
+      list_1
       get :show, { :id => board_1.id, :user_id => user.id  }
       expect(assigns(:board)).to match(board_1)
     end
 
     it "loads all of the current board's lists" do
-      p user
-      p board_1
-      p list_1
-      p card_1
-      p card_8
+      list_1
+      lists
       get :show, { :id => board_1.id, :user_id => user.id  }
       expect(assigns(:lists)).to match_array(lists)
     end
