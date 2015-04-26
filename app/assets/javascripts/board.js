@@ -3,10 +3,12 @@
 //     // your stuff here
 // });
 // $(document).ready(function() {
+// }
+
 $(document).on('page:load', function() {
   // debugger;
-  bindEvents();
   debugger;
+  bindEvents();
   $(function() {
     $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
       connectWith: ".connectedSortable",
@@ -33,7 +35,9 @@ function addNewCard(event) {
     data: {organization_name: $(that).children()[0].value}
     // Will need to edit this if we add more fields to this form
   }).done( function(response) {
-    console.log("done :", response)
+    debugger;
+    console.log("DONE!!!! :")
+    console.log(response)
     var newCard = "<li class='ui-state-default' id='card" + response.id + "'>" + response.organization_name + "</li>"
     $('#sortable1').append(newCard)
     // $('.list#1.card-container').children('ul').append(newCard);
