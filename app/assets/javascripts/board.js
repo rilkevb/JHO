@@ -1,7 +1,12 @@
-$(document).ready(function() {
+// http://stackoverflow.com/questions/17600093/rails-javascript-not-loading-after-clicking-through-link-to-helper
+// $(document).on('page:load', function() {
+//     // your stuff here
+// });
+// $(document).ready(function() {
+$(document).on('page:load', function() {
   // debugger;
   bindEvents();
-
+  debugger;
   $(function() {
     $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
       connectWith: ".connectedSortable",
