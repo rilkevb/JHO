@@ -1,11 +1,16 @@
 class CardsController < ApplicationController
   def create
-    p params
+    # p "*="*50
+    # p "PARAMS ARE: "
+    # p params
+    # p "params[:organization_name]: "
+    # p params[:organization_name]
     # @card = Card.new(card_params)
     @card = Card.new(list_id: 1, organization_name: params[:organization_name])
     if @card.save
       render json: @card
     else
+      #Need to add validation to prevent nill card being created...
       render json: { error: "card failed to create"}
     end
   end
