@@ -24,7 +24,18 @@ function bindEvents() {
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
 
+  $('.card-container').on("dblclick", editCard);
 }
+
+function editCard(event) {
+  var clickedCardId = event.target.id.slice(4);
+
+  //Launch the modal form, make AJAX call to get data to populate modal
+
+  console.log(clickedCardId)
+}
+
+
 
 function addNewCard(event) {
   event.preventDefault();
