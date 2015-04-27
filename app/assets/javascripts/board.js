@@ -5,7 +5,7 @@
 // $(document).ready(function() {
 // }
 
-$(document).on('page:load', function() {
+$(document).ready( function() {
   // debugger;
   debugger;
   bindEvents();
