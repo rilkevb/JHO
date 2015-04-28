@@ -71,12 +71,12 @@ function retrieveCardInfo(currentCardId) {
         height: 300,
         width: 350,
         modal: true,
-        // buttons: {
-        //   "Save/Update": updateCard,
-        //   Cancel: function() {
-        //     dialog.dialog( "close" );
-        //   }
-        // }
+        buttons: {
+          "SaveUpdat": "dfgdfg" ,//updateCard,
+          Cancel: function() {
+            dialog.dialog( "close" );
+          }
+        }
       });
     });
 
