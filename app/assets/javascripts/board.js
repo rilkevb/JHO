@@ -1,14 +1,8 @@
-// http://stackoverflow.com/questions/17600093/rails-javascript-not-loading-after-clicking-through-link-to-helper
-// $(document).on('page:load', function() {
-//     // your stuff here
-// });
-// $(document).ready(function() {
-// }
-
 $(document).ready( function() {
   // debugger;
   debugger;
   bindEvents();
+
   $(function() {
     $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
       connectWith: ".connectedSortable",
@@ -23,19 +17,34 @@ function bindEvents() {
   // mouse down listener
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
-
   $('.card-container').on("dblclick", editCard);
 }
 
 function editCard(event) {
+  //find id of clicked card
+  debugger;
   var clickedCardId = event.target.id.slice(4);
+  //make AJAX call to retrieve card information and launch modal
+  retrieveCardInfo(clickedCardId);
 
-  //Launch the modal form, make AJAX call to get data to populate modal
-
-  console.log(clickedCardId)
 }
 
-
+function retrieveCardInfo(currentCardId) {
+//   event.preventDefault();
+//   var that = this;
+//   $.ajax( {
+//     url: "",//that.action,
+//     type: "GET",
+//     data: {} //{organization_name: $(that).children()[0].value}
+//   }).done( function(response) {
+//     //launch modal
+    $(function() {
+      $( "#dialog" ).dialog();
+    });
+//   }).fail( function(response) {
+//     console.log("failed :", response)
+//   });
+}
 
 function addNewCard(event) {
   event.preventDefault();
