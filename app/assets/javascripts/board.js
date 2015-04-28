@@ -20,30 +20,44 @@ function bindEvents() {
   $('.card-container').on("dblclick", editCard);
 }
 
+var clickedCardId = null;
 function editCard(event) {
   //find id of clicked card
   debugger;
-  var clickedCardId = event.target.id.slice(4);
+  clickedCardId = event.target.id.slice(4);
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
 
 }
 
 function retrieveCardInfo(currentCardId) {
-//   event.preventDefault();
-//   var that = this;
-//   $.ajax( {
-//     url: "",//that.action,
-//     type: "GET",
-//     data: {} //{organization_name: $(that).children()[0].value}
-//   }).done( function(response) {
-//     //launch modal
+  event.preventDefault();
+  var that = this;
+  var listId = $('#card' + currentCardId).closest('.list').attr('id'); // .id instead?
+  var boardId =  $('.board').attr('id');
+
+  $.ajax( {
+    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId,
+    type: "GET",
+    // data: {} //{organization_name: $(that).children()[0].value}
+  }).done( function(response) {
+    //launch modal
+    debugger;
+    $("#dialog").empty();
+    $("#dialog").append("<li> Organization name: " + response.organization_name + "</li>");
     $(function() {
+
+
       $( "#dialog" ).dialog();
+
+
+
+
     });
-//   }).fail( function(response) {
-//     console.log("failed :", response)
-//   });
+
+  }).fail( function(response) {
+    console.log("failed :", response)
+  });
 }
 
 function addNewCard(event) {
