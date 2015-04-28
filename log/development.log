@@ -27428,3 +27428,74 @@ Processing by CardsController#show as */*
   Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"3", "id"=>"2"}
   [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1[0m  [["id", 2]]
 Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/4" for ::1 at 2015-04-28 12:37:52 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"4"}
+  [1m[35mCard Load (0.7ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 4]]
+Completed 200 OK in 3ms (Views: 0.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/1/boards/1/lists/3/cards/5" for ::1 at 2015-04-28 12:37:58 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"3", "id"=>"5"}
+  [1m[36mCard Load (0.6ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1[0m  [["id", 5]]
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/1/boards/1" for ::1 at 2015-04-28 12:38:14 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mList Load (0.2ms)[0m  SELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.1ms)
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 1]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 2]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 3]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 4]]
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 5]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 6]]
+  Rendered boards/show.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 251ms (Views: 245.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/board.self-4161f5a5eaf0c84b298e2168eb90b0b7a17f9804151dd2a2001adad0cac1bfec.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/boards.self-faa21884f262266bf850be1c6fef1fc1ef830c015c7e38c0489493ef8aeadd3f.css?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/assets/application.self-d322e21433b09b7c6566f478b94b9acde869d1038a969e5077126312ece69584.js?body=1" for ::1 at 2015-04-28 12:38:14 -0700
+
+
+Started GET "/users/1/boards/1/lists/2/cards/8" for ::1 at 2015-04-28 12:38:20 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"8"}
+  [1m[36mCard Load (0.5ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1[0m  [["id", 8]]
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.5ms)

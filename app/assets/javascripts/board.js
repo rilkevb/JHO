@@ -72,7 +72,7 @@ function retrieveCardInfo(currentCardId) {
         width: 350,
         modal: true,
         buttons: {
-          "SaveUpdat": "dfgdfg" ,//updateCard,
+          "SaveUpdat": "" ,//updateCard,
           Cancel: function() {
             dialog.dialog( "close" );
           }
