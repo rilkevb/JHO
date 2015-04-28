@@ -43,16 +43,41 @@ function retrieveCardInfo(currentCardId) {
   }).done( function(response) {
     //launch modal
     debugger;
-    $("#dialog").empty();
-    $("#dialog").append("<li> Organization name: " + response.organization_name + "</li>");
+    // $("#card-modal").empty();
+    // $("#card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
+    // $(function() {
+    //   $( "#dialog" ).dialog();
+    // });
+
+    //Populate hidden form
+
+    //Open as modal
     $(function() {
+      var dialog;
+      var form;
+      // var $organizationName = $('#organization-name');
+      // var $organizationSummary = $('#organization-summary');
+      var formHtml = '<input type="text" name="name" id="organization-name" value=' + response.organization_name + ' class="text ui-widget-content ui-corner-all"> <input type="text" name="email" id="organization-summary" value=' + response.organization_summary + ' class="text ui-widget-content ui-corner-all"> <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> '
 
+      $("#card-modal").empty();
+      $("#card-modal").append(formHtml);
 
-      $( "#dialog" ).dialog();
+      // var $inputs = $('#card-modal').children('form').children('fieldset').children('input');
+      // $inputs[0].val(response.organization_name);
+      // $inputs[1].val(response.organization_summary);
+      debugger;
 
-
-
-
+      dialog = $('#card-modal').dialog({
+        height: 300,
+        width: 350,
+        modal: true,
+        // buttons: {
+        //   "Save/Update": updateCard,
+        //   Cancel: function() {
+        //     dialog.dialog( "close" );
+        //   }
+        // }
+      });
     });
 
   }).fail( function(response) {
