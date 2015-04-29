@@ -1,4 +1,11 @@
 class CardsController < ApplicationController
+
+  def show
+    p params
+    card = Card.find_by(id: params[:id])
+    render json: card
+  end
+
   def create
     # p "*="*50
     # p "PARAMS ARE: "
