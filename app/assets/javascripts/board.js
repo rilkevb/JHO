@@ -18,6 +18,7 @@ function bindEvents() {
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
   $('.card-container').on("dblclick", editCard);
+  $('.card-modal').on('submit', updateCard); // is this necessary given the modal function that calls update card?
 }
 
 var clickedCardId = null;
@@ -27,7 +28,31 @@ function editCard(event) {
   clickedCardId = event.target.id.slice(4);
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
+}
 
+function updateCard(event) {
+  // event.preventDefault();
+  var $form = $('fieldset').closest('form');
+  debugger;
+  var $inputs = $form.children('fieldset').children('input');
+  var organizationName = $inputs[0].value;
+  var organizationSummary = $inputs[1].value;
+  var url = $form.attr('action');
+  // var cardId = $form.attr('id');
+  // don't need to send because it's in the params
+
+  var request = $.ajax({
+    type: 'put',
+    url: url,
+    data: { organization_name: organizationName, organization_summary: organizationSummary },
+    // dataType: 'json'
+  })
+
+  request.done(function(response) {
+    console.log("success: ", response);
+  }).fail(function(response) {
+    console.log("failure: ", response);
+  })
 }
 
 function retrieveCardInfo(currentCardId) {
@@ -43,8 +68,8 @@ function retrieveCardInfo(currentCardId) {
   }).done( function(response) {
     //launch modal
     debugger;
-    // $("#card-modal").empty();
-    // $("#card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
+    // $(".card-modal").empty();
+    // $(".card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
     // $(function() {
     //   $( "#dialog" ).dialog();
     // });
@@ -57,22 +82,43 @@ function retrieveCardInfo(currentCardId) {
       var form;
       // var $organizationName = $('#organization-name');
       // var $organizationSummary = $('#organization-summary');
-      var formHtml = '<input type="text" name="name" id="organization-name" value=' + response.organization_name + ' class="text ui-widget-content ui-corner-all"> <input type="text" name="email" id="organization-summary" value=' + response.organization_summary + ' class="text ui-widget-content ui-corner-all"> <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> '
+      // <form method="POST" action="/notes/<%= single_note.id %>">
+// +  <input type="hidden" name="_method" value="PUT">
+      var formHtml = '<form id=' + response.id + ' action=/users/1/boards/'
+                     + boardId + '/lists/' + listId + '/cards/'
+                     + currentCardId + '> '
+                     + ' <input type="hidden" name="_method" value="PUT"/>'
+                      + ' <fieldset> '
+                      + ' <input type="text" name="organization-name" id="organization-name" value='
+                    + response.organization_name
+                    + ' class="text ui-widget-content ui-corner-all">'
+                    + ' <input type="text" name="organization-summary" id="organization-summary" value='
+                    + response.organization_summary
+                    + ' class="text ui-widget-content ui-corner-all">'
+                    + ' <input type="submit" value="Save" tabindex="-1" style="position:absolute; top:-1000px"> </fieldset></form>';
 
-      $("#card-modal").empty();
-      $("#card-modal").append(formHtml);
+      $(".card-modal").empty();
+      $(".card-modal").append(formHtml);
 
-      // var $inputs = $('#card-modal').children('form').children('fieldset').children('input');
+      // var $inputs = $('.card-modal').children('form').children('fieldset').children('input');
       // $inputs[0].val(response.organization_name);
       // $inputs[1].val(response.organization_summary);
       debugger;
 
-      dialog = $('#card-modal').dialog({
+      dialog = $('.card-modal').dialog({
         height: 300,
         width: 350,
         modal: true,
+        position: { my: "center", at: "center", of: window },
+        show: { effect: "slideDown", duration: 800 },
         buttons: {
-          "SaveUpdat": "" ,//updateCard,
+          // updateCard: function() {
+          //   updateCard();
+          // },
+          // For some reason the above function fires on load of the modal
+          Save: function() {
+            updateCard();
+          },
           Cancel: function() {
             dialog.dialog( "close" );
           }
@@ -110,14 +156,16 @@ function findCardId(event) {
 }
 
 function findListId(event) {
+  // rename this to createMovement
   event.preventDefault();
   var that = this;
   var listId = that.id;
   var boardId =  $('.board').attr('id');
 
   $.ajax( {
-    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId,
-    type: "PUT",
+// /users/:user_id/boards/:board_id/lists/:list_id/cards/:card_id/movements
+    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId + '/movements',
+    type: "POST",
     data: {list_id: listId, card_id: cardId, board_id: boardId}
   }).done(function(response) {
     console.log(response, "success")
