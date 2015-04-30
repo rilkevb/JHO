@@ -18,7 +18,11 @@ class CardsController < ApplicationController
 
   def update
     card = Card.find_by(id: params[:card_id])
-    if params[:list_id]
+    if params[:list_id].nil?
+      card.update_attributes(organization_name: params[:organization_name],
+                            organization_summary: params[:organization_summary])
+      render json: card
+    else
       card.list_id = params[:list_id]
       if card.save
         movement = card.movements.new(current_list: params[:list_id], card_id: card.id)
@@ -30,10 +34,6 @@ class CardsController < ApplicationController
       else
         # card save fail
       end
-    else
-      card.update_attributes(organization_name: params[:organization_name]
-                              organization_summary: params[:organization_summary])
-      render json: card
     end
     # need to separate this into two separate custom routes
   end

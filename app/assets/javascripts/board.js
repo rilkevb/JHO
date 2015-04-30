@@ -30,19 +30,22 @@ function editCard(event) {
   retrieveCardInfo(clickedCardId);
 }
 
-function updateCard(currentCardId) {
-  var form = $(this);
-  var data = $(form).serialize();
-  var url = $(form).action;
-  // var cardId =  $(form).id;
-  // use this if passing in currentCardId doesn't work because of the scoping
-
+function updateCard(event) {
+  // event.preventDefault();
+  var $form = $('fieldset').closest('form');
   debugger;
+  var $inputs = $form.children('fieldset').children('input');
+  var organizationName = $inputs[0].value;
+  var organizationSummary = $inputs[1].value;
+  var url = $form.attr('action');
+  // var cardId = $form.attr('id');
+  // don't need to send because it's in the params
 
   var request = $.ajax({
     type: 'put',
     url: url,
-    data: { data: data, id: currentCardId }
+    data: { organization_name: organizationName, organization_summary: organizationSummary },
+    // dataType: 'json'
   })
 
   request.done(function(response) {
@@ -79,12 +82,20 @@ function retrieveCardInfo(currentCardId) {
       var form;
       // var $organizationName = $('#organization-name');
       // var $organizationSummary = $('#organization-summary');
-      var formHtml = '<form id='response.id + '><fieldset>'
-                    + '<input type="text" name="organization-name" id="organization-name" value='
+      // <form method="POST" action="/notes/<%= single_note.id %>">
+// +  <input type="hidden" name="_method" value="PUT">
+      var formHtml = '<form id=' + response.id + ' action=/users/1/boards/'
+                     + boardId + '/lists/' + listId + '/cards/'
+                     + currentCardId + '> '
+                     + ' <input type="hidden" name="_method" value="PUT"/>'
+                      + ' <fieldset> '
+                      + ' <input type="text" name="organization-name" id="organization-name" value='
                     + response.organization_name
-                    + ' class="text ui-widget-content ui-corner-all"> <input type="text" name="organization-summary" id="organization-summary" value='
+                    + ' class="text ui-widget-content ui-corner-all">'
+                    + ' <input type="text" name="organization-summary" id="organization-summary" value='
                     + response.organization_summary
-                    + ' class="text ui-widget-content ui-corner-all"> <input type="submit" value="Save" tabindex="-1" style="position:absolute; top:-1000px"> </fieldset></form>'
+                    + ' class="text ui-widget-content ui-corner-all">'
+                    + ' <input type="submit" value="Save" tabindex="-1" style="position:absolute; top:-1000px"> </fieldset></form>';
 
       $(".card-modal").empty();
       $(".card-modal").append(formHtml);
@@ -98,8 +109,16 @@ function retrieveCardInfo(currentCardId) {
         height: 300,
         width: 350,
         modal: true,
+        position: { my: "center", at: "center", of: window },
+        show: { effect: "slideDown", duration: 800 },
         buttons: {
-          "Save": updateCard(currentCardId),
+          // updateCard: function() {
+          //   updateCard();
+          // },
+          // For some reason the above function fires on load of the modal
+          Save: function() {
+            updateCard();
+          },
           Cancel: function() {
             dialog.dialog( "close" );
           }
