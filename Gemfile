@@ -33,6 +33,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  # Gems for easier debugging
+  gem "binding_of_caller"
+  gem "better_errors"
+
+  # Use Bullet to plan better ActiveRecord queries
+  gem 'bullet'
+
   # Use Rspec for testing
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
