@@ -17,25 +17,11 @@ class CardsController < ApplicationController
   end
 
   def update
-    card = Card.find_by(id: params[:card_id])
-    if params[:list_id].nil?
-      card.update_attributes(organization_name: params[:organization_name],
+    # will want to add validation/error handling here
+    card = Card.find_by(id: params[:id])
+    card.update_attributes(organization_name: params[:organization_name],
                             organization_summary: params[:organization_summary])
-      render json: card
-    else
-      card.list_id = params[:list_id]
-      if card.save
-        movement = card.movements.new(current_list: params[:list_id], card_id: card.id)
-        if movement.save
-          render nothing: true
-        else
-          # movement fail
-        end
-      else
-        # card save fail
-      end
-    end
-    # need to separate this into two separate custom routes
+    render json: card
   end
 
   def destroy

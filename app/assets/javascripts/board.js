@@ -156,14 +156,16 @@ function findCardId(event) {
 }
 
 function findListId(event) {
+  // rename this to createMovement
   event.preventDefault();
   var that = this;
   var listId = that.id;
   var boardId =  $('.board').attr('id');
 
   $.ajax( {
-    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId,
-    type: "PUT",
+// /users/:user_id/boards/:board_id/lists/:list_id/cards/:card_id/movements
+    url: "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId + '/movements',
+    type: "POST",
     data: {list_id: listId, card_id: cardId, board_id: boardId}
   }).done(function(response) {
     console.log(response, "success")

@@ -32906,3 +32906,324 @@ NoMethodError (undefined method `list_id=' for nil:NilClass):
   Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
   Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (30.8ms)
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-04-30 11:54:23 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mBoard Load (0.4ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mList Load (0.4ms)[0m  SELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.4ms)
+  [1m[36mCard Load (0.5ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 1]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 2]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 3]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 4]]
+  [1m[36mCard Load (0.1ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 5]]
+  [1m[35mCard Load (0.1ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 6]]
+  Rendered boards/show.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 949ms (Views: 833.6ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/assets/boards.self-deb81f4ade56829ea4ca0a727ba89da3687a363df135b1f18e844efec8e1a40a.css?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/movements.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/board.self-96b651b73fa2fcc573dca9b7938265cc223be7f6562f7ddf42b25ee081515c4c.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:24 -0700
+
+
+Started GET "/assets/movements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:25 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:25 -0700
+
+
+Started GET "/assets/application.self-d322e21433b09b7c6566f478b94b9acde869d1038a969e5077126312ece69584.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:25 -0700
+
+
+Started GET "/assets/application.self-d322e21433b09b7c6566f478b94b9acde869d1038a969e5077126312ece69584.js?body=1" for 127.0.0.1 at 2015-04-30 11:54:25 -0700
+
+
+Started POST "/users/1/boards/1/lists/1/cards" for 127.0.0.1 at 2015-04-30 11:54:32 -0700
+Processing by CardsController#create as */*
+  Parameters: {"organization_name"=>"Coursera", "user_id"=>"1", "board_id"=>"1", "list_id"=>"1"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (8.1ms)[0m  INSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["list_id", 1], ["organization_name", "Coursera"], ["created_at", "2015-04-30 18:54:32.301889"], ["updated_at", "2015-04-30 18:54:32.301889"]]
+  [1m[36m (86.5ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 122ms (Views: 0.7ms | ActiveRecord: 94.7ms)
+
+
+Started POST "/users/1/boards/1/lists/2/cards/22/movements" for 127.0.0.1 at 2015-04-30 11:54:37 -0700
+Processing by MovementsController#create as */*
+  Parameters: {"list_id"=>"2", "card_id"=>"22", "board_id"=>"1", "user_id"=>"1"}
+  [1m[35mCard Load (0.5ms)[0m  SELECT  "cards".* FROM "cards" LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (18.1ms)[0m  INSERT INTO "movements" ("current_list", "card_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["current_list", "2"], ["card_id", 1], ["created_at", "2015-04-30 18:54:37.236552"], ["updated_at", "2015-04-30 18:54:37.236552"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 41ms (Views: 2.8ms | ActiveRecord: 20.3ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/22" for 127.0.0.1 at 2015-04-30 11:54:41 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"22"}
+  [1m[35mCard Load (0.3ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 22]]
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started PUT "/users/1/boards/1/lists/2/cards/22" for 127.0.0.1 at 2015-04-30 11:54:52 -0700
+Processing by CardsController#update as */*
+  Parameters: {"organization_name"=>"Coursera", "organization_summary"=>"Hiring", "user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"22"}
+  [1m[36mCard Load (0.4ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" IS NULL LIMIT 1[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.4ms)
+
+NoMethodError (undefined method `update_attributes' for nil:NilClass):
+  app/controllers/cards_controller.rb:22:in `update'
+
+
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.8ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.6ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (1.6ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (16.3ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (15.0ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/admin/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (35.0ms)
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-04-30 11:55:32 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mList Load (0.2ms)[0m  SELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.1ms)
+  [1m[36mCard Load (0.5ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 1]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 2]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 3]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 4]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 5]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 6]]
+  Rendered boards/show.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 159ms (Views: 50.9ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/assets/boards.self-deb81f4ade56829ea4ca0a727ba89da3687a363df135b1f18e844efec8e1a40a.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/movements.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/board.self-96b651b73fa2fcc573dca9b7938265cc223be7f6562f7ddf42b25ee081515c4c.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/movements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/assets/application.self-d322e21433b09b7c6566f478b94b9acde869d1038a969e5077126312ece69584.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:33 -0700
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mBoard Load (0.3ms)[0m  SELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mList Load (0.3ms)[0m  [1mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1[0m  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.1ms)
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 1]]
+  [1m[36mCard Load (0.1ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 2]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 3]]
+  [1m[36mCard Load (0.1ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 4]]
+  [1m[35mCard Load (0.5ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 5]]
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 6]]
+  Rendered boards/show.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 110ms (Views: 103.8ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/assets/boards.self-deb81f4ade56829ea4ca0a727ba89da3687a363df135b1f18e844efec8e1a40a.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/movements.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/board.self-96b651b73fa2fcc573dca9b7938265cc223be7f6562f7ddf42b25ee081515c4c.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/movements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started GET "/assets/application.self-d322e21433b09b7c6566f478b94b9acde869d1038a969e5077126312ece69584.js?body=1" for 127.0.0.1 at 2015-04-30 11:55:38 -0700
+
+
+Started POST "/users/1/boards/1/lists/1/cards" for 127.0.0.1 at 2015-04-30 11:55:49 -0700
+Processing by CardsController#create as */*
+  Parameters: {"organization_name"=>"Pending completion", "user_id"=>"1", "board_id"=>"1", "list_id"=>"1"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["list_id", 1], ["organization_name", "Pending completion"], ["created_at", "2015-04-30 18:55:49.432743"], ["updated_at", "2015-04-30 18:55:49.432743"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/users/1/boards/1/lists/2/cards/23/movements" for 127.0.0.1 at 2015-04-30 11:55:53 -0700
+Processing by MovementsController#create as */*
+  Parameters: {"list_id"=>"2", "card_id"=>"23", "board_id"=>"1", "user_id"=>"1"}
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "movements" ("current_list", "card_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["current_list", "2"], ["card_id", 1], ["created_at", "2015-04-30 18:55:53.084938"], ["updated_at", "2015-04-30 18:55:53.084938"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 20ms (Views: 0.7ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:55:55 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[36mCard Load (0.4ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1[0m  [["id", 23]]
+Completed 200 OK in 5ms (Views: 1.3ms | ActiveRecord: 0.4ms)
+
+
+Started PUT "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:56:06 -0700
+Processing by CardsController#update as */*
+  Parameters: {"organization_name"=>"Pending", "organization_summary"=>"sdfasdf", "user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[35mCard Load (0.3ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 23]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "cards" SET "organization_name" = $1, "organization_summary" = $2, "updated_at" = $3 WHERE "cards"."id" = $4  [["organization_name", "Pending"], ["organization_summary", "sdfasdf"], ["updated_at", "2015-04-30 18:56:06.577506"], ["id", 23]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:56:28 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[35mCard Load (0.3ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 23]]
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:56:36 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1[0m  [["id", 23]]
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started PUT "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:56:43 -0700
+Processing by CardsController#update as */*
+  Parameters: {"organization_name"=>"Pending", "organization_summary"=>"RIlke", "user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[35mCard Load (0.3ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 23]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "cards" SET "organization_summary" = $1, "updated_at" = $2 WHERE "cards"."id" = $3  [["organization_summary", "RIlke"], ["updated_at", "2015-04-30 18:56:43.983633"], ["id", 23]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/users/1/boards/1/lists/2/cards/23" for 127.0.0.1 at 2015-04-30 11:56:48 -0700
+Processing by CardsController#show as */*
+  Parameters: {"user_id"=>"1", "board_id"=>"1", "list_id"=>"2", "id"=>"23"}
+  [1m[35mCard Load (0.8ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = $1 LIMIT 1  [["id", 23]]
+Completed 200 OK in 3ms (Views: 1.1ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/users/1/boards/1/lists/1/cards/23/movements" for 127.0.0.1 at 2015-04-30 11:56:56 -0700
+Processing by MovementsController#create as */*
+  Parameters: {"list_id"=>"1", "card_id"=>"23", "board_id"=>"1", "user_id"=>"1"}
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "movements" ("current_list", "card_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["current_list", "1"], ["card_id", 1], ["created_at", "2015-04-30 18:56:56.382013"], ["updated_at", "2015-04-30 18:56:56.382013"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 6ms (Views: 0.4ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/users/1/boards/1/lists/2/cards/23/movements" for 127.0.0.1 at 2015-04-30 11:56:58 -0700
+Processing by MovementsController#create as */*
+  Parameters: {"list_id"=>"2", "card_id"=>"23", "board_id"=>"1", "user_id"=>"1"}
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "movements" ("current_list", "card_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["current_list", "2"], ["card_id", 1], ["created_at", "2015-04-30 18:56:58.505754"], ["updated_at", "2015-04-30 18:56:58.505754"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.4ms)

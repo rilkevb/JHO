@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   resources :users do
     resources :boards do
       resources :lists do
-        resources :cards
+        resources :cards do
+          resources :movements
+        end
       end
     end
   end
