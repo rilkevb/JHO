@@ -18,6 +18,7 @@ function bindEvents() {
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
   $('.card-container').on("dblclick", editCard);
+  $('.card-modal').on('submit', updateCard); // is this necessary given the modal function that calls update card?
 }
 
 var clickedCardId = null;
@@ -27,7 +28,28 @@ function editCard(event) {
   clickedCardId = event.target.id.slice(4);
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
+}
 
+function updateCard(currentCardId) {
+  var form = $(this);
+  var data = $(form).serialize();
+  var url = $(form).action;
+  // var cardId =  $(form).id;
+  // use this if passing in currentCardId doesn't work because of the scoping
+
+  debugger;
+
+  var request = $.ajax({
+    type: 'put',
+    url: url,
+    data: { data: data, id: currentCardId }
+  })
+
+  request.done(function(response) {
+    console.log("success: ", response);
+  }).fail(function(response) {
+    console.log("failure: ", response);
+  })
 }
 
 function retrieveCardInfo(currentCardId) {
@@ -43,8 +65,8 @@ function retrieveCardInfo(currentCardId) {
   }).done( function(response) {
     //launch modal
     debugger;
-    // $("#card-modal").empty();
-    // $("#card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
+    // $(".card-modal").empty();
+    // $(".card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
     // $(function() {
     //   $( "#dialog" ).dialog();
     // });
@@ -57,22 +79,27 @@ function retrieveCardInfo(currentCardId) {
       var form;
       // var $organizationName = $('#organization-name');
       // var $organizationSummary = $('#organization-summary');
-      var formHtml = '<input type="text" name="name" id="organization-name" value=' + response.organization_name + ' class="text ui-widget-content ui-corner-all"> <input type="text" name="email" id="organization-summary" value=' + response.organization_summary + ' class="text ui-widget-content ui-corner-all"> <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> '
+      var formHtml = '<form id='response.id + '><fieldset>'
+                    + '<input type="text" name="organization-name" id="organization-name" value='
+                    + response.organization_name
+                    + ' class="text ui-widget-content ui-corner-all"> <input type="text" name="organization-summary" id="organization-summary" value='
+                    + response.organization_summary
+                    + ' class="text ui-widget-content ui-corner-all"> <input type="submit" value="Save" tabindex="-1" style="position:absolute; top:-1000px"> </fieldset></form>'
 
-      $("#card-modal").empty();
-      $("#card-modal").append(formHtml);
+      $(".card-modal").empty();
+      $(".card-modal").append(formHtml);
 
-      // var $inputs = $('#card-modal').children('form').children('fieldset').children('input');
+      // var $inputs = $('.card-modal').children('form').children('fieldset').children('input');
       // $inputs[0].val(response.organization_name);
       // $inputs[1].val(response.organization_summary);
       debugger;
 
-      dialog = $('#card-modal').dialog({
+      dialog = $('.card-modal').dialog({
         height: 300,
         width: 350,
         modal: true,
         buttons: {
-          "SaveUpdat": "" ,//updateCard,
+          "Save": updateCard(currentCardId),
           Cancel: function() {
             dialog.dialog( "close" );
           }
