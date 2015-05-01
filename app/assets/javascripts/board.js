@@ -153,7 +153,10 @@ function addNewCard(event) {
 
 function findCardId(event) {
   debugger;
-  cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  // cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  // $(event.target).parent().attr('id').slice(4)
+  cardId = $(event.target).closest('li').attr('id').slice(4)
+  debugger;
 }
 
 function findListId(event) {
