@@ -16,12 +16,20 @@
 
               <% list.cards.each do |card| %>
                 <li class="ui-state-default card" id="card<%= card.id %>">
-                  <div id="star-bar">
+                  <div class="organization-name">
+                    <%= card.organization_name  %>
+                  </div>
+                  <div class="star-bar">  <!-- Eventually shrink this div's height -->
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
                     <span class="fa fa-star-half-o"></span>
                     <span class="fa fa-star-o"></span>
-                    <span class="fa fa-star"></span>
                   </div>
-                  <%= card.organization_name  %>
+
                 </li>
 <!--                 ??? FOR SOME VERY WEIRD REASON THE FIRST CARD-CONTAINER ALWAYS HAS AN EXTRA EMPTY LIST ELEMENT IN IT ON LOAD -->
               <% end %>
