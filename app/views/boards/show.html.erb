@@ -7,14 +7,14 @@
       <% @board.lists.each do |list| %>
         <div class="list" id="<%= list.id %>">
           <h3><%= list.name  %></h3>
-            <% if list.id == 1 %>
+          <% if list.id == 1 %>
               <%= render 'cards/new' %>
-            <% end %>
+          <% end %>
           <div class="card-container">
             <ul id="sortable<%= list.id %>" class="connectedSortable">
               <% list.cards.each do |card| %>
                 <li class="ui-state-default card" id="card<%= card.id %>">
-                  <%= card.organization_name  %>
+                  <%= card.organization_name  %> &#xf006; &#xf123; &#xf005;
                 </li>
 <!--                 ??? FOR SOME VERY WEIRD REASON THE FIRST CARD-CONTAINER ALWAYS HAS AN EXTRA EMPTY LIST ELEMENT IN IT ON LOAD -->
               <% end %>
