@@ -4,7 +4,7 @@ $(document).ready( function() {
   bindEvents();
 
   $(function() {
-    $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
+    $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9" ).sortable({
       connectWith: ".connectedSortable",
       placeholder: "ui-state-highlight"
     }).disableSelection();
@@ -25,7 +25,7 @@ var clickedCardId = null;
 function editCard(event) {
   //find id of clicked card
   debugger;
-  clickedCardId = event.target.id.slice(4);
+  clickedCardId = event.target.id.slice(4);  //This functionality will break if you change the DOM
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
 }
@@ -152,7 +152,11 @@ function addNewCard(event) {
 }
 
 function findCardId(event) {
-  cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  debugger;
+  // cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  // $(event.target).parent().attr('id').slice(4)
+  cardId = $(event.target).closest('li').attr('id').slice(4)
+  debugger;
 }
 
 function findListId(event) {
