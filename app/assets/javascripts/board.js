@@ -25,7 +25,7 @@ var clickedCardId = null;
 function editCard(event) {
   //find id of clicked card
   debugger;
-  clickedCardId = event.target.id.slice(4);
+  clickedCardId = event.target.id.slice(4);  //This functionality will break if you change the DOM
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
 }
@@ -152,6 +152,7 @@ function addNewCard(event) {
 }
 
 function findCardId(event) {
+  debugger;
   cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
 }
 
