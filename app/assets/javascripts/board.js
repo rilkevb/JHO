@@ -10,6 +10,8 @@ $(document).ready( function() {
     }).disableSelection();
   });
 
+  //What follows is a temporary hack to get rid of the bug induced list element -- find out what is causing it and permantly remove it later
+  // $('#card').remove()
 })
 
 function bindEvents() {
