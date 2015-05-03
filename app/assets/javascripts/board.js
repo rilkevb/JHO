@@ -17,9 +17,9 @@ $(document).ready( function() {
 function bindEvents() {
   $(".add-card").on("submit", "form", addNewCard);
   // mouse down listener
+  $('.card-container').on("dblclick", editCard);
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
-  $('.card-container').on("dblclick", editCard);
   $('.card-modal').on('submit', updateCard); // is this necessary given the modal function that calls update card?
 }
 
@@ -30,6 +30,7 @@ function editCard(event) {
   clickedCardId = event.target.id.slice(4);  //This functionality will break if you change the DOM
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
+  debugger;
 }
 
 function updateCard(event) {
@@ -58,6 +59,7 @@ function updateCard(event) {
 }
 
 function retrieveCardInfo(currentCardId) {
+  debugger;
   event.preventDefault();
   var that = this;
   var listId = $('#card' + currentCardId).closest('.list').attr('id'); // .id instead?
