@@ -1,6 +1,7 @@
 class MovementsController < ApplicationController
   def create
     card = Card.find_by(params[:id])
+    card.update_attributes(list_id: params[:list_id])
     if card.save
       movement = card.movements.new(current_list: params[:list_id],
                                     card_id: card.id)

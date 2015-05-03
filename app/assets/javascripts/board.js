@@ -4,20 +4,22 @@ $(document).ready( function() {
   bindEvents();
 
   $(function() {
-    $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
+    $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9" ).sortable({
       connectWith: ".connectedSortable",
       placeholder: "ui-state-highlight"
     }).disableSelection();
   });
 
+  //What follows is a temporary hack to get rid of the bug induced list element -- find out what is causing it and permantly remove it later
+  // $('#card').remove()
 })
 
 function bindEvents() {
   $(".add-card").on("submit", "form", addNewCard);
   // mouse down listener
+  $('.card-container').on("dblclick", editCard);
   $('.card-container').mouseup(".card", findCardId);
   $('.list').droppable( {drop: findListId} );
-  $('.card-container').on("dblclick", editCard);
   $('.card-modal').on('submit', updateCard); // is this necessary given the modal function that calls update card?
 }
 
@@ -25,9 +27,10 @@ var clickedCardId = null;
 function editCard(event) {
   //find id of clicked card
   debugger;
-  clickedCardId = event.target.id.slice(4);
+  clickedCardId = event.target.id.slice(4);  //This functionality will break if you change the DOM
   //make AJAX call to retrieve card information and launch modal
   retrieveCardInfo(clickedCardId);
+  debugger;
 }
 
 function updateCard(event) {
@@ -56,6 +59,7 @@ function updateCard(event) {
 }
 
 function retrieveCardInfo(currentCardId) {
+  debugger;
   event.preventDefault();
   var that = this;
   var listId = $('#card' + currentCardId).closest('.list').attr('id'); // .id instead?
@@ -152,7 +156,11 @@ function addNewCard(event) {
 }
 
 function findCardId(event) {
-  cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  debugger;
+  // cardId = $(event.target).attr('id').slice(4);  //BE AWARE OF GLOBAL VARIABLE
+  // $(event.target).parent().attr('id').slice(4)
+  cardId = $(event.target).closest('li').attr('id').slice(4)
+  debugger;
 }
 
 function findListId(event) {
