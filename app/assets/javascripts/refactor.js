@@ -23,8 +23,8 @@ $(document).ready(function() {
 function bindEvents() {
   console.log("in bindEvents function");
   $(".add-card").on("submit", "form", createCard);
-  $('.card-container').on("dblclick", launchCardModal);
-  $('.card-container').mouseup(".card", handleDoubleclick);
+  $('.card-container').on("dblclick", '.card', handleDoubleclick);
+  // $('.card-container').mouseup(".card", handleDoubleclick);
   $('.list').droppable( {drop: createMovement} );
   $('.card-modal').on('submit', updateCardInDatabase);
 }
@@ -32,7 +32,7 @@ function bindEvents() {
 function createCard() {
   event.preventDefault();
   console.log("in createCard function")
-  debugger;
+  // debugger;
   var that = this;
   var url = that.action;
   var data = {organization_name: $(that).children()[0].value}
@@ -45,6 +45,7 @@ function createCard() {
   .done( function(response) {
     console.log("response from server when creating card: ", response)
     addCardToDOM(response);
+    console.log("card should have been added to DOM");
   }).fail(function(response) {
     console.log("creating card failed :", response)
   });
@@ -52,15 +53,28 @@ function createCard() {
 
 function addCardToDOM(data) {
   console.log("in addCardToDOM function")
-  debugger;
-  var newCard = "<li class='ui-state-default' id='card" + data.id + "'>" + data.organization_name + "</li>"
+  // debugger;
+  var newCard = "<li class='ui-state-default' ui-sortable-handle id='card" + data.id + "'>"
+                + "<div class='organization-name'>" + data.organization_name + "</div>"
+                + "<div class='star-bar'>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star'></span>"
+                + "<span class='fa fa-star-half-o'></span>"
+                + "<span class='fa fa-star-o'></span>"
+                + "</div>"
+                + "</li>"
     // need to revise this HTML
     $('#sortable1').append(newCard);
+    console.log("card appended");
     // Don't really like this selector but it works so we can keep it for now
   };
 
 
-  function findClickedCardId(event) {
+  function findClickedCardId() {
     console.log("in findClickedCardId function")
     debugger;
     var clickedCardId = event.target.id.slice(4);
@@ -94,7 +108,7 @@ function addCardToDOM(data) {
     launchCardModal();
   };
 
-function createMovement(event) {
+function createMovement() {
   event.preventDefault();
   console.log("in createMovement function")
   debugger;
