@@ -15,12 +15,7 @@
 
 //= require_tree .
 //= require board
-
-
-
-// $(function() {
-//     $( "#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7" ).sortable({
-//       connectWith: ".connectedSortable",
-//       placeholder: "ui-state-highlight"
-//     }).disableSelection();
-//   });
+//= require refactor
+//= require update_card
+//= require card_modal
+//= require movements
