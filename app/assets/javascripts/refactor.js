@@ -26,7 +26,7 @@ function bindEvents() {
   $('.card-container').on("dblclick", '.card', handleDoubleclick);
   // $('.card-container').mouseup(".card", handleDoubleclick);
   $('.list').droppable( {drop: createMovement} );
-  $('.card-modal').on('submit', updateCardInDatabase);
+  $('.card-modal').on('submit', updateCard);
 }
 
 function createCard() {

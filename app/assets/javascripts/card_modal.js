@@ -24,7 +24,9 @@ function fillCardModal(card) {
   console.log("in fillCardModal function");
   // debugger;
   var boardId = $('.board').attr('id');
-  var listId = $(event.target).closest('.list').attr('id');
+  var listId = card.list_id
+  //$(event.target).closest('.list').attr('id');
+
   /// DOESN'T address lack of server response
   // $(function(card, boardId, listId) {
     // DON'T NEED IIFE HERE
