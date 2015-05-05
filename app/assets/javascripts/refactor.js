@@ -54,7 +54,7 @@ function createCard() {
 function addCardToDOM(data) {
   console.log("in addCardToDOM function")
   // debugger;
-  var newCard = "<li class='ui-state-default' ui-sortable-handle id='card" + data.id + "'>"
+  var newCard = "<li class='ui-state-default card ui-sortable-handle' id='card" + data.id + "'>"
                 + "<div class='organization-name'>" + data.organization_name + "</div>"
                 + "<div class='star-bar'>"
                 + "<span class='fa fa-star'></span>"

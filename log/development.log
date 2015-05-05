@@ -789,3 +789,225 @@ Processing by CardsController#create as */*
   [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["list_id", 1], ["organization_name", "Digg Inc."], ["created_at", "2015-05-05 23:11:58.512891"], ["updated_at", "2015-05-05 23:11:58.512891"]]
   [1m[35m (0.3ms)[0m  COMMIT
 Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mBoard Load (0.5ms)[0m  SELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mList Load (0.9ms)[0m  [1mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1[0m  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.1ms)
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 1]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 2]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 3]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 4]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 5]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 6]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 7]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 8]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 9]]
+  Rendered boards/show.html.erb within layouts/application (91.9ms)
+Completed 200 OK in 405ms (Views: 398.9ms | ActiveRecord: 3.4ms)
+user: apprentice
+/users/1/boards/1
+N+1 Query detected
+  List => [:cards]
+  Add to your finder: :includes => [:cards]
+N+1 Query method call stack
+  /Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:17:in `block in _app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+  /Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:7:in `_app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+  /Users/apprentice/Desktop/JHO/bin/rails:8:in `require'
+  /Users/apprentice/Desktop/JHO/bin/rails:8:in `<top (required)>'
+  /Users/apprentice/Desktop/JHO/bin/spring:13:in `<top (required)>'
+
+/Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:17:in `block in _app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+/Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:7:in `_app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+/Users/apprentice/Desktop/JHO/bin/rails:8:in `require'
+/Users/apprentice/Desktop/JHO/bin/rails:8:in `<top (required)>'
+/Users/apprentice/Desktop/JHO/bin/spring:13:in `<top (required)>'
+
+
+Started GET "/assets/boards.self-772fea3d3caef363b661355fec6089a930c895b5d1650b73689c2b4927e2f2e8.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+
+
+Started GET "/assets/movements.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+
+
+Started GET "/assets/application.self-167193cd81d9330d9ddb5c4ec7b44214fea529aa8a94f3a86e6526e4f652fc02.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:39 -0700
+
+
+Started GET "/assets/font-awesome.min.self-6bb04114c00dc0f2115b700bce976c1d368c4c641247d3f2bd520b3067efef45.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/font-awesome.self-27ce158483783a7667caf792e81620c9b7891e74763e4cd7eef7a51e2a8bb2b8.css?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/board.self-302949148c74f693abc83c54a7d064d21966a255c086528619bae11f12ea176b.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/card_modal.self-66d03fc54799b367936038a4fbdc88dcf3527648518455988938c20a2af03e96.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/movements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/refactor.self-6b325e89eca3a061f380f65fab438695b9c785484f9ac5dd6a59e2a4e5951fc9.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/mvc.self-43edadaa3f78a1dc47672ff0086087a31811ffbdaf42372c937014be8244221d.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/update_card.self-155aa3260ca8f67c3e140e3df41643ced7b73ac400e15763e66a833142699c5a.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started GET "/assets/application.self-a1a74291c4c48f2f663a025ffa678498d6448b849a2d74c0ca25e39ee192c0a7.js?body=1" for 127.0.0.1 at 2015-05-05 16:17:40 -0700
+
+
+Started POST "/users/1/boards/1/lists/1/cards" for 127.0.0.1 at 2015-05-05 16:18:12 -0700
+Processing by CardsController#create as */*
+  Parameters: {"organization_name"=>"I told you time and time", "user_id"=>"1", "board_id"=>"1", "list_id"=>"1"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["list_id", 1], ["organization_name", "I told you time and time"], ["created_at", "2015-05-05 23:18:12.997149"], ["updated_at", "2015-05-05 23:18:12.997149"]]
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/users/1/boards/1" for 127.0.0.1 at 2015-05-05 16:21:04 -0700
+Processing by BoardsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mBoard Load (0.3ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mList Load (0.8ms)[0m  SELECT "lists".* FROM "lists" WHERE "lists"."board_id" = $1  [["board_id", 1]]
+  Rendered cards/_new.html.erb (0.1ms)
+  [1m[36mCard Load (0.4ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 1]]
+  [1m[35mCard Load (0.3ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 2]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 3]]
+  [1m[35mCard Load (0.1ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 4]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 5]]
+  [1m[35mCard Load (0.3ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 6]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 7]]
+  [1m[35mCard Load (0.2ms)[0m  SELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1  [["list_id", 8]]
+  [1m[36mCard Load (0.2ms)[0m  [1mSELECT "cards".* FROM "cards" WHERE "cards"."list_id" = $1[0m  [["list_id", 9]]
+  Rendered boards/show.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 404ms (Views: 399.1ms | ActiveRecord: 3.6ms)
+user: apprentice
+/users/1/boards/1
+N+1 Query detected
+  List => [:cards]
+  Add to your finder: :includes => [:cards]
+N+1 Query method call stack
+  /Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:17:in `block in _app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+  /Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:7:in `_app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+  /Users/apprentice/Desktop/JHO/bin/rails:8:in `require'
+  /Users/apprentice/Desktop/JHO/bin/rails:8:in `<top (required)>'
+  /Users/apprentice/Desktop/JHO/bin/spring:13:in `<top (required)>'
+
+/Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:17:in `block in _app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+/Users/apprentice/Desktop/JHO/app/views/boards/show.html.erb:7:in `_app_views_boards_show_html_erb___1065583754593923903_70330461940880'
+/Users/apprentice/Desktop/JHO/bin/rails:8:in `require'
+/Users/apprentice/Desktop/JHO/bin/rails:8:in `<top (required)>'
+/Users/apprentice/Desktop/JHO/bin/spring:13:in `<top (required)>'
+
+
+Started GET "/assets/boards.self-772fea3d3caef363b661355fec6089a930c895b5d1650b73689c2b4927e2f2e8.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/cards.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/movements.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/application.self-167193cd81d9330d9ddb5c4ec7b44214fea529aa8a94f3a86e6526e4f652fc02.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/font-awesome.min.self-6bb04114c00dc0f2115b700bce976c1d368c4c641247d3f2bd520b3067efef45.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/font-awesome.self-27ce158483783a7667caf792e81620c9b7891e74763e4cd7eef7a51e2a8bb2b8.css?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/board.self-302949148c74f693abc83c54a7d064d21966a255c086528619bae11f12ea176b.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/card_modal.self-66d03fc54799b367936038a4fbdc88dcf3527648518455988938c20a2af03e96.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/cards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/movements.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/mvc.self-43edadaa3f78a1dc47672ff0086087a31811ffbdaf42372c937014be8244221d.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/refactor.self-328472e28840028de4eacbef1195e975a58a8585b36e0b66df2efde630a1818e.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/update_card.self-155aa3260ca8f67c3e140e3df41643ced7b73ac400e15763e66a833142699c5a.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started GET "/assets/application.self-a1a74291c4c48f2f663a025ffa678498d6448b849a2d74c0ca25e39ee192c0a7.js?body=1" for 127.0.0.1 at 2015-05-05 16:21:05 -0700
+
+
+Started POST "/users/1/boards/1/lists/1/cards" for 127.0.0.1 at 2015-05-05 16:21:29 -0700
+Processing by CardsController#create as */*
+  Parameters: {"organization_name"=>"again but no.  ", "user_id"=>"1", "board_id"=>"1", "list_id"=>"1"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "cards" ("list_id", "organization_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["list_id", 1], ["organization_name", "again but no.  "], ["created_at", "2015-05-05 23:21:29.883227"], ["updated_at", "2015-05-05 23:21:29.883227"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+Completed 200 OK in 6ms (Views: 0.7ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/users/1/boards/1/lists/3/cards/4/movements" for 127.0.0.1 at 2015-05-05 16:21:43 -0700
+Processing by MovementsController#create as */*
+  Parameters: {"list_id"=>"3", "card_id"=>"4", "board_id"=>"1", "user_id"=>"1"}
+  [1m[36mCard Load (0.3ms)[0m  [1mSELECT  "cards".* FROM "cards" LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "cards" SET "list_id" = $1, "updated_at" = $2 WHERE "cards"."id" = $3[0m  [["list_id", 3], ["updated_at", "2015-05-05 23:21:43.226004"], ["id", 1]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "movements" ("current_list", "card_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["current_list", "3"], ["card_id", 1], ["created_at", "2015-05-05 23:21:43.234303"], ["updated_at", "2015-05-05 23:21:43.234303"]]
+  [1m[36m (4.2ms)[0m  [1mCOMMIT[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 19ms (Views: 0.8ms | ActiveRecord: 8.5ms)
