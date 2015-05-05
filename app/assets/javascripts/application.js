@@ -14,7 +14,7 @@
 //= require jquery_ujs
 
 //= require_tree .
-//= require board
+
 //= require refactor
 //= require update_card
 //= require card_modal

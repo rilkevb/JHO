@@ -10,8 +10,8 @@ $(document).ready( function() {
     }).disableSelection();
   });
 
-  //What follows is a temporary hack to get rid of the bug induced list element -- find out what is causing it and permantly remove it later
-  // $('#card').remove()
+  What follows is a temporary hack to get rid of the bug induced list element -- find out what is causing it and permanently remove it later
+  $('#card').remove()
 })
 
 function bindEvents() {
@@ -72,13 +72,13 @@ function retrieveCardInfo(currentCardId) {
   }).done( function(response) {
     //launch modal
     debugger;
-    // $(".card-modal").empty();
-    // $(".card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
-    // $(function() {
-    //   $( "#dialog" ).dialog();
-    // });
+    $(".card-modal").empty();
+    $(".card-modal").append("<li> Organization name: " + response.organization_name + "</li>");
+    $(function() {
+      $( "#dialog" ).dialog();
+    });
 
-    //Populate hidden form
+    Populate hidden form
 
     //Open as modal
     $(function() {
@@ -104,9 +104,9 @@ function retrieveCardInfo(currentCardId) {
       $(".card-modal").empty();
       $(".card-modal").append(formHtml);
 
-      // var $inputs = $('.card-modal').children('form').children('fieldset').children('input');
-      // $inputs[0].val(response.organization_name);
-      // $inputs[1].val(response.organization_summary);
+      var $inputs = $('.card-modal').children('form').children('fieldset').children('input');
+      $inputs[0].val(response.organization_name);
+      $inputs[1].val(response.organization_summary);
       debugger;
 
       dialog = $('.card-modal').dialog({
