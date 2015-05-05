@@ -1,5 +1,6 @@
 function launchCardModal() {
   console.log("in launchCardModal function");
+  var dialog;
   var dialogOptions = {
         height: 300,
         width: 350,
@@ -30,7 +31,6 @@ function fillCardModal(card) {
   /// DOESN'T address lack of server response
   // $(function(card, boardId, listId) {
     // DON'T NEED IIFE HERE
-    var dialog;
     var formHtml = '<form id=' + card.id + ' action=/users/1/boards/'
     + boardId + '/lists/' + listId + '/cards/'
     + card.id + '> '
