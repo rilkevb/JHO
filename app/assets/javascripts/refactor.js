@@ -1,32 +1,32 @@
-$(document).ready(function() {
-  // debugger;
-  console.log("in document.ready anonymous function");
+$(document).ready( function() {
+  //console.log("in document.ready anonymous function");
   bindEvents();
 
   $(function() {
-    var unorderedLists = $('.connectedSortable');
-    // grabs the card container from each list
-    // debugger;
+    //All of the lists
+    var $unorderedLists = $('.connectedSortable');
     var sortableOptions = {
       connectWith: ".connectedSortable",
       placeholder: "ui-state-highlight"
     }
-// http://api.jquery.com/jQuery/#jQuery-elementArray
-    $(unorderedLists)
-    .sortable(sortableOptions)
-    .disableSelection();
-    console.log("in anonymous function that activates connectedSortable")
+    // http://api.jquery.com/jQuery/#jQuery-elementArray
+    $unorderedLists
+      .sortable(sortableOptions)
+      .disableSelection();
+    //console.log("in anonymous function that activates connectedSortable")
   });
+
 });
 
-
 function bindEvents() {
-  console.log("in bindEvents function");
-  $(".add-card").on("submit", "form", createCard);
-  $('.card-container').on("dblclick", '.card', handleDoubleclick);
-  // $('.card-container').mouseup(".card", handleDoubleclick);
+  // console.log("in bindEvents function");
+  $(".add-card").on("submit", "form", createCard);  //WORKS
+
   $('.list').droppable( {drop: createMovement} );
-  $('.card-modal').on('submit', updateCard);
+
+  // $('.card-container').on("dblclick", '.card', handleDoubleclick);
+  //  DON'T USE THIS: // $('.card-container').mouseup(".card", handleDoubleclick);
+  // $('.card-modal').on('submit', updateCard);
 }
 
 function createCard() {
@@ -36,7 +36,7 @@ function createCard() {
   var that = this;
   var url = that.action;
   var data = {organization_name: $(that).children()[0].value}
-
+  debugger;
   $.ajax({
     url: url,
     type: "POST",
@@ -76,9 +76,32 @@ function addCardToDOM(data) {
 
   function findClickedCardId() {
     console.log("in findClickedCardId function")
+    var clickedCardId = event.target.closest('.card').id.slice(4);
+    // debugger;
+    return clickedCardId
+  };
+
+  function createMovement() {
+    event.preventDefault();
+    console.log("in createMovement function")
+    // var that = this;
+    var cardId = findClickedCardId();
+    var listId = this.id;
+    var boardId =  $('.board').attr('id');
     debugger;
-    var clickedCardId = event.target.id.slice(4);
-    return clickedCardId // or cardId?
+
+    var url = "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId + '/movements';
+    var data = {list_id: listId, card_id: cardId, board_id: boardId} ;
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: data
+    }).done(function(response) {
+      console.log("success: ", response);
+    }).fail(function(response) {
+      console.log("fail: ", response);
+    });
   };
 
   function getCardFromServer(cardId) {
@@ -118,25 +141,4 @@ function addCardToDOM(data) {
     getCardFromServer(id);
   };
 
-function createMovement() {
-  event.preventDefault();
-  console.log("in createMovement function")
-  debugger;
-  var that = this;
-  var cardId = findClickedCardId();
-  var listId = that.id;
-  var boardId =  $('.board').attr('id');
 
-  var url = "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId + '/movements'
-  var data = {list_id: listId, card_id: cardId, board_id: boardId}
-
-  $.ajax({
-    url: url,
-    type: "POST",
-    data: data
-  }).done(function(response) {
-    console.log("success: ", response);
-  }).fail(function(response) {
-    console.log("fail: ", response);
-  });
-};

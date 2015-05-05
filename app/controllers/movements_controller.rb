@@ -1,5 +1,8 @@
 class MovementsController < ApplicationController
+
   def create
+    p "*="*50
+    p params
     card = Card.find_by(params[:id])
     card.update_attributes(list_id: params[:list_id])
     if card.save
@@ -14,4 +17,5 @@ class MovementsController < ApplicationController
       render json: { error: "card failed to save"}
     end
   end
+
 end
