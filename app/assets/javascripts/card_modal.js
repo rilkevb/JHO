@@ -1,4 +1,5 @@
 function launchCardModal() {
+  console.log("in fillCardModal function");
   var dialogOptions = {
         height: 300,
         width: 350,
@@ -14,11 +15,20 @@ function launchCardModal() {
           }
         }
       }
+  debugger;
   dialog = $('.card-modal').dialog(dialogOptions);
+  console.log("modal should have launched");
 }
 
 function fillCardModal(card) {
-  $(function() {
+  console.log("in fillCardModal function");
+  debugger;
+  var $card = $(event.target).closest('.card');
+  var currentCardId = $card.attr('id').slice(4);
+  var boardId = $('.board').attr('id');
+  var listId = $card.closest('.list').attr('id');
+  /// DOESN'T address lack of server response
+  $(function(card, boardId, listId) {
     var dialog;
     var formHtml = '<form id=' + card.id + ' action=/users/1/boards/'
     + boardId + '/lists/' + listId + '/cards/'

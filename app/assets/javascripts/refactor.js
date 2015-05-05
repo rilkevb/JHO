@@ -84,26 +84,34 @@ function addCardToDOM(data) {
   function getCardFromServer(cardId) {
     event.preventDefault();
     console.log("in getCardFromServer function")
-    debugger;
-    var that = this;
+    // debugger;
+    // var that = this;
     var listId = $('#card' + cardId).closest('.list').attr('id'); // .id instead?
     var boardId =  $('.board').attr('id');
     var url =  "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId
+    console.log("listId is: ", listId, "boardId is: ", boardId, "cardId is: ", cardId, "url is: ", url);
 
     $.ajax({
       url: url,
       type: "GET",
-    })
-    .done(function(response) {
+    }).done(function(response) {
+      console.log("in getCardFromServer .done function with response: ", response);
       var card = response; // JSON card?
       return card;
+      console.log("success! Got card from server: ", response);
+    }).fail(function(response) {
+      console.log("failed to get card from server: ", response);
+    }).always(function(response) {
+      console.log("response always: ", response)
     })
   };
 
 // findClickedCardId >> getCardFromServer >> fillCardModal >> launchCardModal
   function handleDoubleclick() {
     var id = findClickedCardId();
+    console.log("in handleDoubleclick, id is: ", id);
     var card =  getCardFromServer(id);
+    console.log("in handleDoubleclick, card is: ", card);
     fillCardModal(card);
     launchCardModal();
   };
