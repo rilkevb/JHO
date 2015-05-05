@@ -1,5 +1,5 @@
 function launchCardModal() {
-  console.log("in fillCardModal function");
+  console.log("in launchCardModal function");
   var dialogOptions = {
         height: 300,
         width: 350,
@@ -15,24 +15,23 @@ function launchCardModal() {
           }
         }
       }
-  debugger;
+  // debugger;
   dialog = $('.card-modal').dialog(dialogOptions);
   console.log("modal should have launched");
 }
 
 function fillCardModal(card) {
   console.log("in fillCardModal function");
-  debugger;
-  var $card = $(event.target).closest('.card');
-  var currentCardId = $card.attr('id').slice(4);
+  // debugger;
   var boardId = $('.board').attr('id');
-  var listId = $card.closest('.list').attr('id');
+  var listId = $(event.target).closest('.list').attr('id');
   /// DOESN'T address lack of server response
-  $(function(card, boardId, listId) {
+  // $(function(card, boardId, listId) {
+    // DON'T NEED IIFE HERE
     var dialog;
     var formHtml = '<form id=' + card.id + ' action=/users/1/boards/'
     + boardId + '/lists/' + listId + '/cards/'
-    + currentCardId + '> '
+    + card.id + '> '
     + ' <input type="hidden" name="_method" value="PUT"/>'
     + ' <fieldset> '
     + ' <input type="text" name="organization-name" id="organization-name" value='
@@ -44,6 +43,7 @@ function fillCardModal(card) {
     + ' <input type="submit" value="Save" tabindex="-1" style="position:absolute; top:-1000px"> </fieldset></form>';
 
     $(".card-modal").empty();
-    $(".card-modal").append(formHtml);
-  });
+    var cardModal = $(".card-modal").append(formHtml);
+    console.log("card modal filled: ", cardModal);
+  // });
 };

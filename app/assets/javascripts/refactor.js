@@ -95,10 +95,13 @@ function addCardToDOM(data) {
       url: url,
       type: "GET",
     }).done(function(response) {
+      // debugger;
       console.log("in getCardFromServer .done function with response: ", response);
-      var card = response; // JSON card?
-      return card;
+      var card = response;
       console.log("success! Got card from server: ", response);
+      fillCardModal(card);
+      launchCardModal();
+      console.log("in done function: modal should've launched");
     }).fail(function(response) {
       console.log("failed to get card from server: ", response);
     }).always(function(response) {
@@ -110,10 +113,9 @@ function addCardToDOM(data) {
   function handleDoubleclick() {
     var id = findClickedCardId();
     console.log("in handleDoubleclick, id is: ", id);
-    var card =  getCardFromServer(id);
-    console.log("in handleDoubleclick, card is: ", card);
-    fillCardModal(card);
-    launchCardModal();
+    // This retrieves the data, then fills and launches
+    // the modal in the done callback
+    getCardFromServer(id);
   };
 
 function createMovement() {
