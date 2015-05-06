@@ -20,7 +20,7 @@ $(document).ready( function() {
 
 function bindEvents() {
   // console.log("in bindEvents function");
-  $(".add-card").on("submit", "form", createCard);  //WORKS
+  $(".add-card").on("submit", "form", createCard);  //WORKS, had to update the HTML
 
   $('.list').droppable( {drop: createMovement} );
 
@@ -52,24 +52,23 @@ function createCard() {
 }
 
 function addCardToDOM(data) {
-  console.log("in addCardToDOM function")
-  // debugger;
+  // console.log("in addCardToDOM function")
   var newCard = "<li class='ui-state-default card ui-sortable-handle' id='card" + data.id + "'>"
                 + "<div class='organization-name'>" + data.organization_name + "</div>"
                 + "<div class='star-bar'>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star'></span>"
-                + "<span class='fa fa-star-half-o'></span>"
-                + "<span class='fa fa-star-o'></span>"
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star'></span> "
+                + "<span class='fa fa-star-half-o'></span> "
+                + "<span class='fa fa-star-o'></span> "
                 + "</div>"
                 + "</li>"
     // need to revise this HTML
     $('#sortable1').append(newCard);
-    console.log("card appended");
+    // console.log("card appended");
     // Don't really like this selector but it works so we can keep it for now
   };
 
@@ -88,15 +87,18 @@ function addCardToDOM(data) {
     var cardId = findClickedCardId();
     var listId = this.id;
     var boardId =  $('.board').attr('id');
+    console.log("cardId : ", cardId);
+    console.log("listId : ", listId);
+    console.log("boardId : ", boardId);
     debugger;
 
     var url = "/users/1/boards/" + boardId + "/lists/" + listId + "/cards/" + cardId + '/movements';
-    var data = {list_id: listId, card_id: cardId, board_id: boardId} ;
+    // var data = {list_id: listId, card_id: cardId, board_id: boardId} ;
 
     $.ajax({
       url: url,
       type: "POST",
-      data: data
+      // data: data  //This is not doing anything....
     }).done(function(response) {
       console.log("success: ", response);
     }).fail(function(response) {
