@@ -21,10 +21,9 @@ $(document).ready( function() {
 function bindEvents() {
   // console.log("in bindEvents function");
   $(".add-card").on("submit", "form", createCard);  //WORKS, had to update the HTML
+  $('.list').droppable( {drop: createMovement} );  //Works, had to fix the controller
 
-  $('.list').droppable( {drop: createMovement} );
-
-  // $('.card-container').on("dblclick", '.card', handleDoubleclick);
+  $('.card-container').on("dblclick", '.card', handleDoubleclick);
   //  DON'T USE THIS: // $('.card-container').mouseup(".card", handleDoubleclick);
   // $('.card-modal').on('submit', updateCard);
 }
