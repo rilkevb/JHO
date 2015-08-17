@@ -2,6 +2,8 @@ class Board < ActiveRecord::Base
   belongs_to :user
   has_many :lists
 
+  validates_presence_of :user_id, :name
+
   # moved list creation to callback instead using module in seed file
   after_create: :generate_board_lists
 
