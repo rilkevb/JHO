@@ -1,13 +1,12 @@
 class CardsController < ApplicationController
 
-  def show
-    p params
-    card = Card.find_by(id: params[:id])
-    render json: card
-  end
+  # def show
+  #   card = Card.find_by(id: params[:id])
+  #   render json: card
+  # end
 
   def create
-    card = Card.new(list_id: 1, organization_name: params[:organization_name])
+    card = Card.new(card_params)
     if card.save
       render json: card
     else
@@ -19,17 +18,25 @@ class CardsController < ApplicationController
   def update
     # will want to add validation/error handling here
     card = Card.find_by(id: params[:id])
-    card.update_attributes(organization_name: params[:organization_name],
-                            organization_summary: params[:organization_summary])
-    render json: card
+    if card.update_attributes(card_params)
+      render json: card
+    else
+      render json: { error: "card failed to update"}
+    end
   end
 
   def destroy
+    card = Card.find(params[:id])
+    if card.destroy!
+      render json: { success: "card destroyed"}
+    else
+      render json: {error: "card was not destroyed"}
+    end
   end
 
   private
   def card_params
-    # params.require(:card).permit(:list_id, :organization_name)
-    # need to add remaining attributes later. going for MVP now.
+    # which of these can we get rid of?
+    params.require(:card).permit(:list_id, :organization_name, :organization_description, :position_description, :position_applied_for, :advocate, :tech_stack, :recent_articles, :glassdoor_rating, :title, :description)
   end
 end
