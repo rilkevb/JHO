@@ -3,6 +3,7 @@ class Board < ActiveRecord::Base
   has_many :lists
 
   validates_presence_of :user_id, :name
+  # need to check numericality of user id and length of name (no nils)
 
   # moved list creation to callback instead using module in seed file
   after_create: :generate_board_lists
