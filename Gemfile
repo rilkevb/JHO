@@ -56,6 +56,6 @@ end
 
 # deploying to Heroku
 group :production do
-  gem 'thin'
   gem 'rails_12factor'
+  gem 'puma'
 end
