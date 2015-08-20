@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
       p "no session"
     else
       p "there's a session, redirecting to boards index"
-      redirect boards_path
+      redirect_to boards_path
     end
   end
 end
