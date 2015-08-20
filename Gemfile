@@ -44,6 +44,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
 
+  # Use Capybara, SimpleCov, JSON-Spec for testing
+  gem 'capybara'
+  gem 'simplecov', :require => false
+  gem 'json_spec'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
