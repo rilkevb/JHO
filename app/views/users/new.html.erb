@@ -1,7 +1,17 @@
 <h1>Users#new aka Register</h1>
-<form action="/users" method="POST">
-  <label for="email">Email</label>
-  <input type="email" name="email">
-  <label for="password">Password</label>
-  <input type="password" name="password_hash">
-</form>
+<%= render '/shared/error_messages' %>
+<%= form_for(@user) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+<% end %>
