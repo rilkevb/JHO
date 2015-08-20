@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to JHO!"
       redirect_to boards_path
     else
-      render 'new'
+      render 'new', status: 422
     end
   end
 
