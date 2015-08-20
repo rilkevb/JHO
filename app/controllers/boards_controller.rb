@@ -9,9 +9,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    # @user = User.find_by(id: params[:user_id])
-    # @board = Board.find_by(id: params[:id])
-    @board = Board.where(user_id: session[:user_id]).first
+    @board = Board.where(id: params[:id]).first
     render json: @board
   end
 
@@ -21,9 +19,9 @@ class BoardsController < ApplicationController
     @board.user_id = user.id
     if @board.save
       user.boards << @board
-      render json: @board
+      render json: @board, status: 201
     else
-      render json: {error: "board failed to save"}
+      render json: {errors: { name: "Board name can't be blank"} }, status: 422
     end
   end
 
