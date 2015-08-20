@@ -1,9 +1,11 @@
 class BoardsController < ApplicationController
+  include SessionsHelper
+
+  before_action :redirect_unless_logged_in
+
   def index
-    # @user = User.find_by(id: session[:user_id])
-    # @boards = @user.boards
+    @board = Board.new
     @boards = Board.where(user_id: session[:user_id])
-    render json: @boards
   end
 
   def show
@@ -14,10 +16,12 @@ class BoardsController < ApplicationController
   end
 
   def create
-    user = User.find(session[:user_id])
-    board = user.boards.create(board_params)
-    if board.save
-      render json: board
+    @board = Board.new(board_params)
+    user = User.find_by(id: session[:user_id])
+    @board.user_id = user.id
+    if @board.save
+      user.boards << @board
+      render json: @board
     else
       render json: {error: "board failed to save"}
     end
@@ -33,7 +37,7 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    @board = Board.find(id: params[:id])
+    @board = Board.find(params[:id])
     if @board.destroy!
       render json: { success: "board destroyed!"}
     else
@@ -41,8 +45,8 @@ class BoardsController < ApplicationController
     end
   end
 
-
+  private
   def board_params
-    params.require(:board).permit(:user_id, :name)
+    params.require(:board).permit(:name)
   end
 end
