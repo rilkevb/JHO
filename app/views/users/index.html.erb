@@ -1,8 +1,0 @@
-<% if @user %>
-<p>
-  Hi <%= @user.name %>!
-</p>
-<% else %>
-<p>Nobody is logged in. Log in as guest user 1 by clicking
-  <%= link_to '/users/1' do %>here<% end %>.</p>
-<% end %>

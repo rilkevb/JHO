@@ -6,10 +6,10 @@ class Board < ActiveRecord::Base
   # need to check numericality of user id and length of name (no nils)
 
   # moved list creation to callback instead using module in seed file
-  after_create: :generate_board_lists
+  after_create :generate_board_lists
 
   def generate_board_lists
-    list_names = ["Organizations of Interest", "Find Advocate",
+    list_names = ["Organizations of Interest", "Find Advocate", "Advocate Found",
     "Application", "Cultural", "Code Challenge", "Tech Screen",
     "Onsite", "Negotiation", "Outcome"]
 

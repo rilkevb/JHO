@@ -2,6 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* boards */
+.board-button {
+  border: 1px black solid;
+  background-color: #f7f7f7;
+  height: 100px;
+  width: 100px;
+
+  div { opacity: 0.3; }
+
+  a {
+    color: #00b0ff;
+    height: inherit;
+    width: inherit;
+  }
+
+  .board-button-name {
+    font-family: Helvetica, sans-serif;
+  }
+}
+
   #sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9 {
     border: 1px solid #eee;
     width: 142px;
