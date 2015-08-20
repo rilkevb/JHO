@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  describe "GET #new" do
+  end
+
   describe "POST #create" do
     context "when is successfully created" do
       before(:each) do
@@ -28,5 +31,11 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
+  end
+
+  describe "PUT #update" do
+  end
+
+  describe "DELETE #destroy" do
   end
 end
