@@ -34,8 +34,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   # Gems for easier debugging
-  gem "binding_of_caller"
-  gem "better_errors"
+  # commenting out for CircleCI
+  # gem "binding_of_caller"
+  # gem "better_errors"
 
   # Use Bullet to plan better ActiveRecord queries
   gem 'bullet'
@@ -50,7 +51,8 @@ group :development, :test do
   gem 'json_spec'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  # commenting out for CircleCI
+  # gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
