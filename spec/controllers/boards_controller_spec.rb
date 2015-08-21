@@ -101,7 +101,7 @@ describe "POST #create" do
         expect(board_response).to have_key(:errors)
       end
 
-      it "renders the json errors on why the user could not be created" do
+      it "renders the json errors on why the board could not be created" do
         board_response = JSON.parse(response.body, symbolize_names: true)
         expect(board_response[:errors][:name]).to include "can't be blank"
       end
