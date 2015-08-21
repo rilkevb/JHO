@@ -1,11 +1,10 @@
 class Board < ActiveRecord::Base
   belongs_to :user
-  has_many :lists
+  has_many :lists, dependent: :destroy
 
-  validates_presence_of :user_id, :name
-  # need to check numericality of user id and length of name (no nils)
+  validates :user_id, presence: true, numericality: { only_integer: true }
+  validates :name, presence: true, length: { minimum: 3 }
 
-  # moved list creation to callback instead using module in seed file
   after_create :generate_board_lists
 
   def generate_board_lists
