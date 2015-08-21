@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe "GET #new" do
+    @user = User.new
+    it "loads a blank user for the new user form" do
+      expect(assigns(:user)).to eq(@user)
+    end
   end
 
   describe "POST #create" do
