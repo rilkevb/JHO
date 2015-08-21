@@ -1,9 +1,12 @@
 class Card < ActiveRecord::Base
   belongs_to :list
-  has_many :movements
-  has_many :tasks
+  has_many :movements, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+  # Destroys associated tasks & movements when card is destroyed
+  # Can also use delete, which ignores callbacks (deletes from the database directly)
 
-  validates_presence_of :organization_name, :list_id
+  validates :list_id, presence: true, numericality: { only_integer: true }
+  validates :organization_name, presence: true, length: { minimum: 3 }
 
   # schema attributes
       # :list_id,
