@@ -22,15 +22,18 @@ class UsersController < ApplicationController
       render json: user
     else
       render json: { error: "user update failed"}
+      # render 'edit'
     end
   end
 
   def destroy
-    user = User.find(params[:id])
-    if user.destroy!
-      render json: { success: "user destroyed"}
+    user = User.where(id: params[:id]).first
+    if user
+      user.destroy!
+      render json: { success: { message: "user destroyed" }
+                     }, status: 200
     else
-      render json: { error: "user not destroyed"}
+      render json: { errors: { user_id: "user id not found"} }, status: 422
     end
   end
 
