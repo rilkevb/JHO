@@ -2,8 +2,8 @@
 
 *Your job hunt, organized.*
 
-[![Circle CI](https://circleci.com/gh/mtvillwock/jho.svg?style=svg)](https://circleci.com/gh/mtvillwock/jho)
-
+[![Circle CI](https://circleci.com/gh/mtvillwock/jho.svg?style=svg&circle-token=:61c1a903f8b4b59801920e70480195dbc7295f69)](https://circleci.com/gh/mtvillwock/jho)
+[![Circle CI](https://circleci.com/gh/mtchavez/circleci.svg?style=svg)](https://circleci.com/gh/mtchavez/circleci)
 ## Pending:
 
 - Angular frontend rewrite
