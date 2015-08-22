@@ -7,9 +7,9 @@ class TasksController < ApplicationController
   def create
     task = Task.new(task_params)
     if task.save
-      render json: task
+      render json: task, status: 200
     else
-      render json: { error: "task not created"}
+      render json: { errors: {title: "Title can't be blank and must be a minimum of 3 characters"} }, status: 422
     end
   end
 
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
     if task.update(task_params)
       render json: task
     else
-      render json: { error: "task not updated"}
+      render json: { errors: {title: "Title can't be blank and must be a minimum of 3 characters"} }, status: 422
     end
   end
 
