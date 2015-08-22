@@ -107,4 +107,38 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    context "when is successfully destroyed" do
+      before(:each) do
+        @task = Task.create(title: "Cool task", card_id: @card.id)
+      end
+
+      it "destroys the specified task" do
+        expect{
+          delete :destroy, id: @task
+        }.to change{Task.count}.by(-1)
+      end
+
+      it "has a success status code" do
+        delete :destroy, id: @task
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns a success json success" do
+        delete :destroy, id: @task
+        success_response = JSON.parse(response.body, symbolize_names: true)
+        expect(success_response).to have_key(:success)
+      end
+    end
+
+    context "when it fails to find a task to destroy" do
+      it "renders a json error" do
+        delete :destroy, id: "foo"
+        destroy_response = JSON.parse(response.body, symbolize_names: true)
+        expect(destroy_response[:errors][:card_id]).to include "not found"
+        expect(destroy_response[:errors][:id]).to include "not found"
+      end
+    end
+  end
 end

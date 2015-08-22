@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     if task.destroy!
       render json: { success: "task destroyed"}
     else
-      render json: { error: "task not destroyed"}
+      render json: { errors: { card_id: "user id not found", id: "task id not found"} }, status: 422
     end
   end
 
