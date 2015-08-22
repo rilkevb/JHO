@@ -74,7 +74,7 @@ RSpec.describe UsersController, type: :controller do
       before(:each) do
         @user = User.create(name: "Agent J", email: "Jay@MIB.com", password: "NoisyCricket", password_confirmation: "NoisyCricket")
       end
-      it "destroys the specified user" do
+      it "changes the user count by -1" do
         expect{
           delete :destroy, id: @user
         }.to change{User.count}.by(-1)

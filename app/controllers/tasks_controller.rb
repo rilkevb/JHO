@@ -23,9 +23,13 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.where(id: params[:id])
-    if task.destroy!
-      render json: { success: "task destroyed"}
+    task = Task.where(id: params[:id]).first
+    if task
+      if task.destroy
+        render json: { success: "task destroyed"}, status: 200
+      else
+        render json: { errors: "task not destroyed, possible callback error"}, status: 422
+      end
     else
       render json: { errors: { card_id: "user id not found", id: "task id not found"} }, status: 422
     end
