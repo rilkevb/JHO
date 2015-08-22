@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   def index
-    tasks = Task.where(card_id: params[:card_id])
-    render json: tasks
+    @tasks = Task.where(card_id: params[:card_id])
+    render json: @tasks
   end
 
   def create
