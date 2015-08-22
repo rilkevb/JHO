@@ -11,11 +11,13 @@ RSpec.describe MovementsController, type: :controller do
   end
 
   describe "POST #create" do
-    before(:each) do
-      post :create, card_id: @card, movement: { current_list: @card.list.name, card_id: @card.id }
-    end
 
     context "when is successfully created" do
+      before(:each) do
+        @valid_movement_attrs = { current_list: @card.list.name, card_id: @card.id }
+        post :create, card_id: @card, movement: @valid_movement_attrs
+      end
+
       it "responds with a success 200 code" do
         expect(response).to have_http_status 200
       end
@@ -40,7 +42,10 @@ RSpec.describe MovementsController, type: :controller do
 
     context "when is not created" do
       before(:each) do
-        post :create, card_id: @card, movement: { current_list: "no", card_id: @card.id }
+        @invalid_movement_attrs =  { current_list: "no", card_id: @card.id }
+        post :create, card_id: @card, movement: @invalid_movement_attrs
+        p "creation failed"
+        ap response.body
       end
 
       it { is_expected.to respond_with 422 }
@@ -58,11 +63,13 @@ RSpec.describe MovementsController, type: :controller do
   end
 
   describe "PUT #update" do
-    before(:each) do
-      @valid_attributes = { current_list: "Negotiation" }
-      put :update, card_id: @card, id: @original_movement, movement: @valid_attributes
-    end
+
     context "when is successfully updated" do
+      before(:each) do
+        @valid_attributes = { current_list: "Negotiation" }
+        put :update, card_id: @card, id: @original_movement, movement: @valid_attributes
+      end
+
       it "responds with a success 200 code" do
         expect(response).to have_http_status 200
       end
