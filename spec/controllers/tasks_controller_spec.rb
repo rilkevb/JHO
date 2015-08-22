@@ -34,8 +34,14 @@ RSpec.describe TasksController, type: :controller do
 
       it "renders a JSON of the created task" do
         body = response.body
-        json_task = @task.to_json
-        expect(body).to match(json_task)
+        ## This seems hacky and unsafe to rely on
+        json_task = Task.last.to_json
+        expect(body).to eql(json_task)
+      end
+
+      it "renders the task json title" do
+        task_json = JSON.parse(response.body, symbolize_names: true)
+        expect(task_json[:title]).to eql "Some task"
       end
     end
 

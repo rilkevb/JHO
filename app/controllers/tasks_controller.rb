@@ -28,10 +28,10 @@ class TasksController < ApplicationController
       if task.destroy
         render json: { success: "task destroyed"}, status: 200
       else
-        render json: { errors: "task not destroyed, possible callback error"}, status: 422
+        render json: { errors: "task #{task.id} not destroyed, possible callback error"}, status: 422
       end
     else
-      render json: { errors: { card_id: "user id not found", id: "task id not found"} }, status: 422
+      render json: { errors: { card_id: "task id #{params[:card_id]} not found", id: "task id #{params[:id]} not found"} }, status: 422
     end
   end
 
