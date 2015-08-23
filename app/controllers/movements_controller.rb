@@ -1,9 +1,9 @@
 class MovementsController < ApplicationController
   def create
     card = Card.where(id: params[:card_id]).first
-    movement = card.movements.new(current_list: card.list.name,
+    movement = card.movements.new(
                                   # The below breaks the tests
-                                  # current_list: params[:current_list],
+                                  current_list: params[:current_list],
                                   card_id: card.id)
     if movement.save
       render json: movement, status: 200
