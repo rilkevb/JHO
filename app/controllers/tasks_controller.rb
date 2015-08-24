@@ -37,6 +37,9 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:card_id, :title, :completed)
+    # params.require(:task).permit(:card_id, :title, :completed)
+    # Not using require here because that wants movement to be included in params
+    # Still need to investigate more about strong params, especially re: testing
+    params.permit(:card_id, :title, :completed)
   end
 end

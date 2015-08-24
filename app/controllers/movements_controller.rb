@@ -40,7 +40,10 @@ class MovementsController < ApplicationController
 
   private
   def movement_params
-    params.require(:movement).permit(:card_id, :current_list)
+    # params.require(:movement).permit(:card_id, :current_list)
+    # Not using require here because that wants movement to be included in params
+    # Still need to investigate more about strong params, especially re:
+    params.permit(:card_id, :current_list)
   end
 
   # consider defining error messages here to provide dynamic ones and prevent tightly coupled tests

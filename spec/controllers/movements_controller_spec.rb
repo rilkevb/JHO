@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# Action, params, session, flash
+# get(:view, {'id' => '12'}, nil, {'message' => 'booya!'})
+
 RSpec.describe MovementsController, type: :controller do
   before(:each) do
     @user = User.create(name: "The Doctor", email: "doctor@thetardis.com", password: "Fantastic!",password_confirmation: "Fantastic!")
@@ -15,8 +18,6 @@ RSpec.describe MovementsController, type: :controller do
     context "when is successfully created" do
       before(:each) do
         @valid_movement_attrs = { current_list: "Negotiation", card_id: @card.id }
-        # action, params, session, flash
-        # get(:view, {'id' => '12'}, nil, {'message' => 'booya!'})
         post(:create, @valid_movement_attrs)
       end
 
