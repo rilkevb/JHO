@@ -72,7 +72,7 @@ RSpec.describe MovementsController, type: :controller do
 
     context "when is successfully updated" do
       before(:each) do
-        @valid_attributes = { card_id: @card, id: @original_movement, current_list: "Outcome" }
+        @valid_attributes = { card_id: @card.id, id: @original_movement.id, current_list: "Outcome" }
         put(:update, @valid_attributes)
       end
 
@@ -80,7 +80,7 @@ RSpec.describe MovementsController, type: :controller do
         expect(response).to have_http_status 200
       end
 
-      it "updates the edited field" do
+      it "updates the current list" do
         movement_response = JSON.parse(response.body, symbolize_names: true)
         expect(movement_response[:current_list]).to eql(@valid_attributes[:current_list])
       end
@@ -93,14 +93,14 @@ RSpec.describe MovementsController, type: :controller do
 
       it "renders a JSON of the updated movement" do
         body = response.body
-        json_movement = @original_movement.to_json
-        expect(body).to match(json_movement)
+        json_movement = Movement.where(id: @valid_attributes[:id]).first.to_json
+        expect(body).to eql(json_movement)
       end
     end
 
     context "when is not updated" do
       before(:each) do
-        @invalid_attributes = { card_id: @card, id: @movement, current_list: nil }
+        @invalid_attributes = { card_id: @card.id, id: @original_movement.id, current_list: "" }
         put(:update, @invalid_attributes)
       end
 
