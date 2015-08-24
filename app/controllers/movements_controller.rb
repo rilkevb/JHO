@@ -1,10 +1,8 @@
 class MovementsController < ApplicationController
   def create
     card = Card.where(id: params[:card_id]).first
-    movement = card.movements.new(
-                                  # The below breaks the tests
-                                  current_list: params[:current_list],
-                                  card_id: card.id)
+    movement = Movement.new(card_id: card.id, current_list: params[:current_list])
+    # use save! if debugging in development
     if movement.save
       render json: movement, status: 200
     else
@@ -44,4 +42,6 @@ class MovementsController < ApplicationController
   def movement_params
     params.require(:movement).permit(:card_id, :current_list)
   end
+
+  # consider defining error messages here to provide dynamic ones and prevent tightly coupled tests
 end

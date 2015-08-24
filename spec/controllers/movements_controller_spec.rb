@@ -14,8 +14,10 @@ RSpec.describe MovementsController, type: :controller do
 
     context "when is successfully created" do
       before(:each) do
-        @valid_movement_attrs = { current_list: @card.list.name, card_id: @card.id }
-        post :create, card_id: @card, movement: @valid_movement_attrs
+        @valid_movement_attrs = { current_list: "Negotiation", card_id: @card.id }
+        # action, params, session, flash
+        # get(:view, {'id' => '12'}, nil, {'message' => 'booya!'})
+        post(:create, @valid_movement_attrs)
       end
 
       it "responds with a success 200 code" do
@@ -24,7 +26,7 @@ RSpec.describe MovementsController, type: :controller do
 
       it "increments the movement count by 1" do
         expect{
-          post :create, card_id: @card, movement: { current_list: "Organizations of Interest", card_id: @card.id }
+          post(:create, @valid_movement_attrs)
         }.to change{Movement.count}.by(1)
       end
 
@@ -36,19 +38,23 @@ RSpec.describe MovementsController, type: :controller do
 
       it "renders the movement json current list" do
         movement_json = JSON.parse(response.body, symbolize_names: true)
-        expect(movement_json[:current_list]).to eql "Interested In"
+        expect(movement_json[:current_list]).to eql @valid_movement_attrs[:current_list]
       end
     end
 
     context "when is not created" do
       before(:each) do
         @invalid_movement_attrs =  { current_list: "no", card_id: @card.id }
-        post :create, card_id: @card, movement: @invalid_movement_attrs
-        p "creation failed"
-        ap response.body
+        post(:create, @invalid_movement_attrs)
       end
 
       it { is_expected.to respond_with 422 }
+
+      it "increments the movement count by 0" do
+        expect{
+          post(:create, @invalid_movement_attrs)
+        }.to change{Movement.count}.by(0)
+      end
 
       it "renders an errors json" do
         movement_json = JSON.parse(response.body, symbolize_names: true)
@@ -66,8 +72,8 @@ RSpec.describe MovementsController, type: :controller do
 
     context "when is successfully updated" do
       before(:each) do
-        @valid_attributes = { current_list: "Negotiation" }
-        put :update, card_id: @card, id: @original_movement, movement: @valid_attributes
+        @valid_attributes = { card_id: @card, id: @original_movement, current_list: "Outcome" }
+        put(:update, @valid_attributes)
       end
 
       it "responds with a success 200 code" do
@@ -81,21 +87,21 @@ RSpec.describe MovementsController, type: :controller do
 
       it "does not change the movement count" do
         expect{
-          put :update, card_id: @card, id: @original_movement, movement: @valid_attributes
+          put(:update, @valid_attributes)
         }.to change{Movement.count}.by(0)
       end
 
       it "renders a JSON of the updated movement" do
         body = response.body
-        json_movement = @movement.to_json
+        json_movement = @original_movement.to_json
         expect(body).to match(json_movement)
       end
     end
 
     context "when is not updated" do
       before(:each) do
-        @invalid_attributes = { current_list: nil }
-        put :update, card_id: @card, id: @movement, movement: @invalid_attributes
+        @invalid_attributes = { card_id: @card, id: @movement, current_list: nil }
+        put(:update, @invalid_attributes)
       end
 
       it { is_expected.to respond_with 422 }
