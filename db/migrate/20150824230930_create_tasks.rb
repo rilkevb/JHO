@@ -4,6 +4,8 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :card_id
       t.string :title
       t.boolean :completed, null: false, default: false
+
+      t.timestamps null: false
     end
   end
 end
