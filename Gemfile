@@ -54,6 +54,9 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'json_spec'
 
+  # Add awesome print for human friendly object reading
+  gem 'awesome_print'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # commenting out for CircleCI
   # gem 'byebug'
