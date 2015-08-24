@@ -21,25 +21,27 @@ class BoardsController < ApplicationController
       user.boards << @board
       render json: @board, status: 201
     else
-      render json: {errors: { name: "Board name can't be blank"} }, status: 422
+      render json: {errors: { name: "Board name can't be blank or have fewer than 3 characters"} }, status: 422
     end
   end
 
   def update
-    board = Boards.where(user_id: session[:user_id])
+    board = Board.where(id: params[:id]).first
     if board.update(board_params)
-      render json: board
+      render json: board, status: 200
     else
-      render json: {error: "board failed to update"}
+      render json: { errors: { id: "board #{params[:id]} not found, failed to update", name: "board name can't be blank or must contain 3 or more characters" }
+      }, status: 422
     end
   end
 
   def destroy
-    @board = Board.find(params[:id])
-    if @board.destroy!
-      render json: { success: "board destroyed!"}
+    @board = Board.where(id: params[:id]).first
+    if @board
+      @board.destroy!
+      render json: { success: "board destroyed!"}, status: 200
     else
-      render json: { error: "board failed to destroy"}
+      render json: { errors: { id: "board #{params[:id]} not found, board failed to destroy"} }, status: 422
     end
   end
 
