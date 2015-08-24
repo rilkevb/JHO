@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824223649) do
+ActiveRecord::Schema.define(version: 20150824230930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,19 @@ ActiveRecord::Schema.define(version: 20150824223649) do
   create_table "board_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "board_id"
-    t.boolean "admin"
+    t.boolean "admin",    default: false, null: false
   end
 
   create_table "boards", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_assignments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,9 +69,11 @@ ActiveRecord::Schema.define(version: 20150824223649) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer "card_id"
-    t.string  "title"
-    t.boolean "completed"
+    t.integer  "card_id"
+    t.string   "title"
+    t.boolean  "completed",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "users", force: :cascade do |t|
