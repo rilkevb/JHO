@@ -1,8 +1,10 @@
-<% if @user %>
-<% if @boards %>
-<% @boards.each do |board| %>
-<!-- <p>link_to(board)</p> -->
-<a href="/users/<%= @user.id %>/boards/<%= board.id %>"><%= board.name %></a>
+<% if current_user %>
+  <h2>Hello, <%= @current_user.name %>!</h2>
+    <% if @boards %>
+      <% @boards.each do |board| %>
+        <%= render partial: "board", locals: { board: board } %>
+      <% end %>
+    <% end %>
 <% end %>
-<% end %>
-<% end %>
+
+<%= render 'new' %>

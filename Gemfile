@@ -24,18 +24,23 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
+# Add for AngularJS
+gem 'angular-rails-templates'
+gem 'bower-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Gems for easier debugging
-  gem "binding_of_caller"
-  gem "better_errors"
+  # commenting out for CircleCI
+  # gem "binding_of_caller"
+  # gem "better_errors"
 
   # Use Bullet to plan better ActiveRecord queries
   gem 'bullet'
@@ -44,18 +49,27 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
 
+  # Use Capybara, SimpleCov, JSON-Spec for testing
+  gem 'capybara'
+  gem 'simplecov', :require => false
+  gem 'json_spec'
+
+  # Add awesome print for human friendly object reading
+  gem 'awesome_print'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  # commenting out for CircleCI
+  # gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 1.3.4'
 end
 
 # deploying to Heroku
 group :production do
-  gem 'thin'
   gem 'rails_12factor'
+  gem 'puma'
 end
