@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
   def update
     list = List.where(id: params[:id]).first
-    if list.update_attributes(list_params)
+    if list.update(list_params)
       render json: list, status: 200
     else
       render json: { errors:
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
       render json: { success: "list destroyed"}, status: 200
     else
       render json: { errors: {
-                     id: "card #{params[:id]} not found, failed to destroy"}
+                     id: "list #{params[:id]} not found, failed to destroy"}
                      }, status: 422
     end
   end
