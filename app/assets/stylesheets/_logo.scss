@@ -1,0 +1,9 @@
+@import 'brand';
+
+#logo {
+    color: white;
+    background-color: $brand-secondary;
+    padding: 10px;
+    font-size: 30px;
+    box-shadow: 3px 3px 10px white;
+}
