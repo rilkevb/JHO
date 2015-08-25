@@ -8,29 +8,28 @@ class CardsController < ApplicationController
   def create
     card = Card.new(card_params)
     if card.save
-      render json: card
+      render json: card, status: 201
     else
-      #Need to add validation to prevent nil card being created...
-      render json: { error: "card failed to create"}
+      render json: { errors: { organization_name: "organization_name can't be blank and must have 3 or more characters "} }, status: 422
     end
   end
 
   def update
-    # will want to add validation/error handling here
-    card = Card.find_by(id: params[:id])
+    card = Card.where(id: params[:id]).first
     if card.update_attributes(card_params)
       render json: card
     else
-      render json: { error: "card failed to update"}
+      render json: { errors: {id: "card #{params[:id]} not found, failed to update",
+                              organization_name: "organization_name can't be blank and must have 3 or more characters "} }
     end
   end
 
   def destroy
-    card = Card.find(params[:id])
-    if card.destroy!
-      render json: { success: "card destroyed"}
+    card = Card.where(id: params[:id]).first
+    if card.destroy
+      render json: { success: "card destroyed"}, status: 200
     else
-      render json: {error: "card was not destroyed"}
+      render json: {error: {id: "card #{params[:id]} not found, failed to destroy"} }, status: 422
     end
   end
 
