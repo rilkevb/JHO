@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :board_members, only: [:create, :update, :destroy]
+  resources :card_assignments, only: [:create, :update, :destroy]
   resources :boards, only: [:show, :index, :create, :update, :destroy]
   resources :lists, only: [:create, :update, :destroy]
   resources :cards, only: [:create, :update, :destroy] do
