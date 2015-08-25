@@ -3,28 +3,38 @@ class ListsController < ApplicationController
   def create
     list = List.new(list_params)
     if list.save
-      render json: list
+      render json: list, status: 201
     else
-      render json: { error: "list failed to create"}
+      render json: { errors:
+                     { name: "organization name can't be blank and must have 3 or more characters",
+                       position_id: "position_id can't be blank and must be a number",
+                       board_id: "board_id can't be blank and must be a number"}
+                     }, status: 422
     end
   end
 
   def update
-    # will want to add validation/error handling here
-    list = List.find_by(id: params[:id])
+    list = List.where(id: params[:id]).first
     if list.update_attributes(list_params)
-      render json: list
+      render json: list, status: 200
     else
-      render json: { error: "list failed to update"}
+      render json: { errors:
+                     { name: "organization name can't be blank and must have 3 or more characters",
+                       position_id: "position_id can't be blank and must be a number",
+                       board_id: "board_id can't be blank and must be a number"}
+                     }, status: 422
     end
   end
 
   def destroy
-    list = List.find(params[:id])
-    if list.destroy!
-      render json: { success: "list destroyed"}
+    list = List.where(id: params[:id]).first
+    if list
+      list.destroy
+      render json: { success: "list destroyed"}, status: 200
     else
-      render json: {error: "list was not destroyed"}
+      render json: { errors: {
+                     id: "card #{params[:id]} not found, failed to destroy"}
+                     }, status: 422
     end
   end
 
