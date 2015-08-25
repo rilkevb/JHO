@@ -2,7 +2,7 @@ class BoardMembersController < ApplicationController
 
   def create
     board_member = BoardMember.new(board_member_params)
-    if board_member.save
+    if board_member.save!
       render json: board_member, status: 201
     else
       render json:
