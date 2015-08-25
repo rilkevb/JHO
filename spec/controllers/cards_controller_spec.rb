@@ -60,23 +60,23 @@ RSpec.describe CardsController, :type => :controller do
   describe "PUT #update" do
     context "when is successfully updated" do
       before(:each) do
-        @valid_attributes = { id: @card.id, organization_name: "Google", list_id: @list.id }
-        put(:update, card: @valid_attributes)
+        @valid_attributes = { organization_name: "Google", list_id: @list.id }
+        put(:update, { id: @card.id, card: @valid_attributes })
       end
 
       it { is_expected.to respond_with 200 }
 
       it "renders a JSON of the updated card" do
-        body = JSON.parse(response.body)
-        updated_card = Card.where(id: @valid_attributes.id).first.to_json
+        body = response.body
+        updated_card = Card.where(id: @card.id).first.to_json
         expect(body).to eql updated_card
       end
     end
 
     context "when fails to update" do
       before(:each) do
-        @invalid_attributes = { id: @card.id, organization_name: nil, list_id: @list.id }
-        put(:update, card: @invalid_attributes)
+        @invalid_attributes = { organization_name: nil, list_id: @list.id }
+        put(:update, id: @card.id, card: @invalid_attributes)
       end
 
       it { is_expected.to respond_with 422 }
@@ -101,14 +101,14 @@ RSpec.describe CardsController, :type => :controller do
       end
 
       it "has a success 200 status code" do
-        delete :destroy, id: @new_card
+        delete :destroy, id: @new_card.id
         expect(response).to have_http_status(200)
       end
 
       it "changes the card count by -1" do
         expect{
           delete :destroy, id: @new_card.id
-        }.change{Card.count}.by(-1)
+        }.to change{ Card.count }.by(-1)
       end
 
       it "renders a json success" do
@@ -119,6 +119,9 @@ RSpec.describe CardsController, :type => :controller do
     end
 
     context "when fails to find card to destroy" do
+      before(:each) do
+        delete :destroy, id: "foo"
+      end
 
       it "responds with a 422 status" do
         expect(response).to have_http_status(422)
@@ -127,17 +130,15 @@ RSpec.describe CardsController, :type => :controller do
       it "does not change the card count" do
         expect{
           delete :destroy, id: "fail"
-        }.to_not change{Card.count}.by(0)
+        }.to change{ Card.count }.by(0)
       end
 
       it "renders an errors json" do
-        delete :destroy, id: "fail"
         success_response = JSON.parse(response.body, symbolize_names: true)
         expect(success_response).to have_key(:errors)
       end
 
       it "renders the json errors on why the movement could not be destroyed" do
-        delete :destroy, id: "foo"
         fail_response = JSON.parse(response.body, symbolize_names: true)
         expect(fail_response[:errors][:id]).to include "not found"
       end
