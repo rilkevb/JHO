@@ -15,7 +15,7 @@ RSpec.describe BoardMembersController, type: :controller do
   describe "POST #create" do
     context "when is successfully created" do
       before(:each) do
-        @valid_attributes = { board_id: @board.id, user_id: @user.id, admin: false }
+        @valid_attributes = { board_id: @board.id, user_id: @user.id }
         post(:create, board_member: @valid_attributes)
       end
 
