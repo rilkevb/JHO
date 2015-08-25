@@ -8,7 +8,7 @@ class BoardMembersController < ApplicationController
       render json:
       { errors: {
           user_id: "user_id can't be blank and must be a number",
-        card_id: "board_id can't be blank and must be a number"}
+        board_id: "board_id can't be blank and must be a number"}
         }, status: 422
     end
   end
@@ -21,7 +21,7 @@ class BoardMembersController < ApplicationController
       render json:
       { errors: {
           user_id: "user_id can't be blank and must be a number",
-        card_id: "board_id can't be blank and must be a number"}
+        board_id: "board_id can't be blank and must be a number"}
         }, status: 422
     end
   end

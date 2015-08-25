@@ -9,7 +9,7 @@ RSpec.describe BoardMembersController, type: :controller do
     session[:user_id] = @user.id
     @boards = @user.boards
     @board = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
-    @board_member = BoardMember.create(board_id: @board.id, user_id: @user.id)
+    @board_member_1 = BoardMember.create(board_id: @board.id, user_id: @user.id)
   end
 
   describe "POST #create" do
