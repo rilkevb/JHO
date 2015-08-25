@@ -4,5 +4,5 @@ class BoardMember < ActiveRecord::Base
 
   validates :user_id, presence: true, numericality: { only_integer: true }
   validates :board_id, presence: true, numericality: { only_integer: true }
-  # validates :admin, presence: true
+  validates :admin, presence: true
 end

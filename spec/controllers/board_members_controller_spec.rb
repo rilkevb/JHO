@@ -9,13 +9,13 @@ RSpec.describe BoardMembersController, type: :controller do
     session[:user_id] = @user.id
     @boards = @user.boards
     @board = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
-    @board_member_1 = BoardMember.create(board_id: @board.id, user_id: @user.id)
+    @board_member_1 = BoardMember.create(board_id: @board.id, user_id: @user.id, admin: true)
   end
 
   describe "POST #create" do
     context "when is successfully created" do
       before(:each) do
-        @valid_attributes = { board_id: @board.id, user_id: @user.id }
+        @valid_attributes = { board_id: @board.id, user_id: @user.id, admin: false }
         post(:create, board_member: @valid_attributes)
       end
 
@@ -57,7 +57,7 @@ RSpec.describe BoardMembersController, type: :controller do
     describe "PUT #update" do
       context "when is successfully updated" do
         before(:each) do
-          @board_member = BoardMember.create(board_id: @board.id, user_id: @user.id)
+          @board_member = BoardMember.create(board_id: @board.id, user_id: @user.id, admin: true)
           @valid_attributes = { board_id: 2, user_id: 2 }
           put(:update, {id: @board_member.id, board_member: @valid_attributes})
         end
