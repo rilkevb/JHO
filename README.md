@@ -12,6 +12,11 @@
 - Database indexing
 - External API calls or data scraping
 
+Built with:
+
+- Ruby on Rails
+- AngularJS
+
 Configuration Settings and Use:
 - Ruby version: ```2.0.0-p353```
 - System dependencies: see ```Gemfile```
