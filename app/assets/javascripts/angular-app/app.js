@@ -19,17 +19,21 @@
         }
     ]);
 
+    // start boardController
     app.controller('boardController', function() {
         var board = this;
-
+        // should we do board.models.lists or boards.lists.cards etc.?
         board.lists = [{
             name: "Interested In"
         }, {
             name: "Applied"
-        }];
-    });
+        }, {
+            name: "Interviewed"
+        }]
+    }); // End of boardController
 
     // Extract this to separate file later
+    // start TodoListController
     app.controller('TodoListController', function() {
         var todoList = this;
         todoList.todos = [{
@@ -65,5 +69,4 @@
         };
     });
     // end todoListController
-
 })();

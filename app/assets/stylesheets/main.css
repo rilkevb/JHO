@@ -8,10 +8,10 @@
   float: left;
 }
 
-ul[dnd-list], ul[dnd-list] > li {
-    position: relative;
-}
-
 .footer {
   clear: both;
+}
+
+.card {
+  border: 1px black solid;
 }
