@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
   def index
     @board = Board.new
     @boards = Board.where(user_id: session[:user_id])
+    render '/app'
   end
 
   def show
