@@ -6,7 +6,7 @@
 
 ## Pending:
 
-- Angular frontend rewrite
+- Angular frontend rewrite (in progress)
 - mobile-first responsive design
 - Comprehensive testing (Angular and Rails)
 - Database indexing
