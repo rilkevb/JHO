@@ -14,15 +14,18 @@
     <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
     [ <a href="#" ng-click="todoList.archive()">archive</a> ]
     <ul class="unstyled" dnd-list="todoList.todos">
-      <li class="card" ng-repeat="todo in todoList.todos"
+      <li class="card"
+          ng-repeat="todo in todoList.todos"
           dnd-draggable="todo"
           dnd-effect-allowed="move"
-          dnd-type="todo">
-          <!-- dnd-moved="" -->
-          <!-- dnd-selected="" -->
+          dnd-type="todo"
+          dnd-moved="todoList.todos.splice($index, 1)"
+          >
+          <!-- dnd-selected="models.selected = item"
+          ng-class="{'selected': models.selected === item}" -->
         <!-- dnd-draggable: value has to be an object that represents the data of the element -->
         <!-- dnd-effect-allowed: callback for when element is moved
-        //// this should do some visual effect
+        //// this should delete the element being dragged to avoid duplicates
         -->
         <!-- dnd-canceled: callback for when drag and drop operation is canceled
         //// this should return the card to where it was
