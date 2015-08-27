@@ -10,7 +10,7 @@
 
 (function() {
     // inject dependency modules
-    var app = angular.module('todoApp', []);
+    var app = angular.module('todoApp', ['dndLists']);
     // for compatibility with Rails CSRF protection
     app.config([
         '$httpProvider',
@@ -21,7 +21,6 @@
 
     // Extract this to separate file later
     app.controller('TodoListController', function() {
-        console.log("ctrl loaded");
         var todoList = this;
         todoList.todos = [{
             text: 'learn angular',

@@ -17,6 +17,7 @@
 //= require angular-rails-templates
 
 //= require angular-app/app
+//= require angular-app/angular-drag-and-drop-lists
 //= require_tree ./angular-app/templates
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/filters
