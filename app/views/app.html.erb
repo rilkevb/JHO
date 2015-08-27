@@ -1,26 +1,60 @@
-<!-- <!doctype html>
-<html ng-app="todoApp">
-  <head>
-    <script src="angular.min.js"></script>
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="main.css">
-  </head>
-  <body> -->
-    <h2>Todo</h2>
-    <div ng-controller="TodoListController as todoList">
-      <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
-      [ <a href="" ng-click="todoList.archive()">archive</a> ]
-      <ul class="unstyled">
-        <li ng-repeat="todo in todoList.todos">
-          <input type="checkbox" ng-model="todo.done">
-          <span class="done-{{todo.done}}">{{todo.text}}</span>
-        </li>
-      </ul>
-      <form ng-submit="todoList.addTodo()">
-        <input type="text" ng-model="todoList.todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-      </form>
-    </div>
-  <!-- </body>
-</html> -->
+<div class="board" ng-controller="boardController as board">
+  <!-- dndlists (array from controller object) -->
+  <!-- value has to be the array in which the data of the dropped element should be inserted. -->
+  <div class="list"
+      ng-repeat="list in board.lists"
+      ng-controller="TodoListController as todoList"
+      dnd-lists="todoList.todos"
+      dnd-allowed-types="['todo']">
+      <!--
+      Add the following callbacks
+      dnd-allowed-types (takes an array of allowed item types)
+      //// When used, only items that had a matching dnd-type attribute will be droppable
+      dnd-drop and dnd-inserted are callbacks
+      //// these will handle the ajax calls to the database
+     -->
+    <h2>{{ list.name }}</h2>
+    <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+    [ <a href="#" ng-click="todoList.archive()">archive</a> ]
+    <!-- RE: The callbacks below  -->
+    <!-- dragover fires as long as element is being dragged/held over a list -->
+    <!-- drop does not appear to be firing at all, not sure why -->
+    <!-- dnd-dragover="todoList.dragoverCallback(event, index, external, type)"
+    dnd-drop="todoList.dropCallback(event, index, item, external, type, 'itemType')"
+    dnd-inserted="todoList.logEvent('Element was inserted at position ' + index, event)" -->
+    <ul class="unstyled" dnd-list="todoList.todos">
+    <!-- Need to implement callbacks so empty lists will allow us to drag items onto them -->
+
+      <li class="card"
+          ng-repeat="todo in todoList.todos"
+          dnd-draggable="todo"
+          dnd-effect-allowed="move"
+          dnd-type="todo"
+          dnd-dragstart="todoList.logEvent('Started to drag an item', event)"
+          dnd-moved="todoList.todos.splice($index, 1); todoList.logEvent('Item moved', event)"
+          dnd-copied="todoList.logEvent('Item copied', event)"
+          dnd-canceled="todoList.logEvent('Drag operation canceled', event)"
+          dnd-dragend="todoList.logEvent('Drag operation ended', event)">
+          <!-- dnd-selected="models.selected = item"
+          ng-class="{'selected': models.selected === item}" -->
+        <!-- dnd-draggable: value has to be an object that represents the data of the element -->
+        <!-- dnd-effect-allowed: callback for when element is moved
+        //// this should delete the element being dragged to avoid duplicates
+        -->
+        <!-- dnd-canceled: callback for when drag and drop operation is canceled
+        //// this should return the card to where it was
+        -->
+        <!-- dnd-selected: for when element is clicked but not dragged
+        //// this should launch the modal
+        -->
+        <input type="checkbox" ng-model="todo.done">
+        <span class="done-{{todo.done}}">{{todo.text}}</span>
+      </li>
+    </ul>
+    <form ng-submit="todoList.addTodo()">
+      <input type="text" ng-model="todoList.todoText"  size="30"
+             placeholder="add new todo here">
+      <input class="btn-primary" type="submit" value="add">
+    </form>
+  </div>
+</div>
