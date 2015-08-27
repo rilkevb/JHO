@@ -6,21 +6,48 @@
     <link rel="stylesheet" href="main.css">
   </head>
   <body> -->
-    <h2>Todo</h2>
-    <div ng-controller="TodoListController as todoList">
-      <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
-      [ <a href="" ng-click="todoList.archive()">archive</a> ]
-      <ul class="unstyled">
-        <li ng-repeat="todo in todoList.todos">
-          <input type="checkbox" ng-model="todo.done">
-          <span class="done-{{todo.done}}">{{todo.text}}</span>
-        </li>
-      </ul>
-      <form ng-submit="todoList.addTodo()">
-        <input type="text" ng-model="todoList.todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-      </form>
+    <div class="board" ng-controller="boardController as board">
+      <div class="list" ng-repeat="list in board.lists" ng-controller="TodoListController as todoList"
+          dnd-lists="todoList.todos"
+          dnd-allowed-types="[todo]"
+          dnd-drop="" dnd-inserted="">
+        <!-- dndlists (tasks array from controller object)
+        /// value has to be the array in which the data of the dropped element should be inserted. -->
+        <!-- dnd-allowed-types (takes an array of allowed item types)
+        //// When used, only items that had a matching dnd-type attribute will be droppable -->
+        <!-- dnd-drop and dnd-inserted are callbacks
+        //// these will handle the ajax calls to the database
+         -->
+        <h2>{{ list.name }}</h2>
+        <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+        [ <a href="" ng-click="todoList.archive()">archive</a> ]
+        <ul class="unstyled">
+          <li ng-repeat="todo in todoList.todos"
+              dnd-draggable="todo"
+              dnd-effect-allowed="move"
+              dnd-type="todo"
+              dnd-moved=""
+              dnd-selected="">
+            <!-- dnd-draggable: value has to be an object that represents the data of the element -->
+            <!-- dnd-effect-allowed: callback for when element is moved
+            //// this should do some visual effect
+            -->
+            <!-- dnd-canceled: callback for when drag and drop operation is canceled
+            //// this should return the card to where it was
+            -->
+            <!-- dnd-selected: for when element is clicked but not dragged
+            //// this should launch the modal
+            -->
+            <input type="checkbox" ng-model="todo.done">
+            <span class="done-{{todo.done}}">{{todo.text}}</span>
+          </li>
+        </ul>
+        <form ng-submit="todoList.addTodo()">
+          <input type="text" ng-model="todoList.todoText"  size="30"
+                 placeholder="add new todo here">
+          <input class="btn-primary" type="submit" value="add">
+        </form>
+      </div>
     </div>
   <!-- </body>
-</html> -->
+</html>-->

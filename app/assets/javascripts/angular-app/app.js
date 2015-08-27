@@ -19,6 +19,16 @@
         }
     ]);
 
+    app.controller('boardController', function() {
+        var board = this;
+
+        board.lists = [{
+            name: "Interested In"
+        }, {
+            name: "Applied"
+        }];
+    });
+
     // Extract this to separate file later
     app.controller('TodoListController', function() {
         var todoList = this;
