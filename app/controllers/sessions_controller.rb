@@ -1,11 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
 
-  def new
-    # For the shared error messages in the form
-    @user = User.new
-  end
-
   def create
     @user = User.new
     user = User.find_by(email: params[:session][:email].downcase)
@@ -20,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to '/'
+    render json: { success: "session destroyed, user logged out", }, status: 200
   end
 end

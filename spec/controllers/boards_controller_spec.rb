@@ -7,8 +7,9 @@ RSpec.describe BoardsController, :type => :controller do
                         password: "password",
                         password_confirmation: "password")
     session[:user_id] = @user.id
-    @boards = @user.boards
     @board_1 = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
+    @board_2 = Board.create(name: "Project Manager Job Hunt", user_id: @user.id)
+    @boards = @user.boards
     @request_headers = {
       "Accept" => "application/json",
       "Content-Type" => "application/json"
@@ -28,14 +29,16 @@ RSpec.describe BoardsController, :type => :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "renders the app template" do
-      get :index
-      expect(response).to render_template("app")
-    end
-
     it "loads all of the user's boards" do
       get :index
       expect(assigns(:boards)).to match_array(@boards)
+    end
+
+    it "renders the user's boards as a JSON" do
+      get :index
+      body = response.body
+      boards = @boards.to_json
+      expect(body).to match(boards)
     end
   end
 

@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe "GET #new" do
-    @user = User.new
-    it "loads a blank user for the new user form" do
-      expect(assigns(:user)).to eq(@user)
-    end
-  end
 
   describe "POST #create" do
 
@@ -16,16 +10,18 @@ RSpec.describe UsersController, type: :controller do
         post :create, user: @valid_attributes
       end
 
-      it "should add to the user count" do
+      it "increments the user count by 1" do
         expect{
           user = User.create(name: "The Doctor", email: "doctor@thetardis.com", password: "Fantastic!", password_confirmation: "Fantastic!")
         }.to change{User.count}.by(1)
       end
-      # do we need to check first response since it ends with a redirect?
-      # it { should respond_with 201 }
-      it { should respond_with 302 }
-      it "redirects to boards index" do
-        expect(response).to redirect_to boards_path
+
+      it { should respond_with 201 }
+
+      it "renders a JSON of the created user" do
+        body = response.body
+        user = User.last.to_json
+        expect(body).to eql user
       end
     end
 
@@ -35,10 +31,26 @@ RSpec.describe UsersController, type: :controller do
         post :create, { user: @invalid_attributes }
       end
 
-      it { should respond_with 422 }
+      it { is_expected.to respond_with 422 }
 
-      it "re-renders the new template" do
-        expect(response).to render_template(:new)
+      it "renders a JSON error for an invalid name" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:name]).to include "can't be blank"
+      end
+
+      it "renders a JSON error for an invalid email" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:email]).to include "valid format"
+      end
+
+      it "renders a JSON error for an invalid password" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:password]).to include "at least 6 characters"
+      end
+
+      it "renders a JSON error for an invalid password confirmation" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:password_confirmation]).to include "must match password"
       end
     end
   end
@@ -73,9 +85,24 @@ RSpec.describe UsersController, type: :controller do
         expect(user_response).to have_key(:errors)
       end
 
-      it "renders the json errors on why the user could not be created" do
+      it "renders a JSON error for an invalid name" do
         user_response = JSON.parse(response.body, symbolize_names: true)
         expect(user_response[:errors][:name]).to include "can't be blank"
+      end
+
+      it "renders a JSON error for an invalid email" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:email]).to include "valid format"
+      end
+
+      it "renders a JSON error for an invalid password" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:password]).to include "at least 6 characters"
+      end
+
+      it "renders a JSON error for an invalid password confirmation" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:password_confirmation]).to include "must match password"
       end
     end
   end

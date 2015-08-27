@@ -1,6 +1,0 @@
-<div class="board-button">
-  <%= link_to(board) do %>
-    <p class="board-button-name"><%= board.name %></p>
-  <% end %>
-  <%= link_to "Delete Board", board_path(board), method: 'delete', data: { confirm: "Are you sure?" } %>
-</div>
