@@ -28,9 +28,9 @@ RSpec.describe BoardsController, :type => :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "renders the index template" do
+    it "renders the app template" do
       get :index
-      expect(response).to render_template("index")
+      expect(response).to render_template("app")
     end
 
     it "loads all of the user's boards" do
