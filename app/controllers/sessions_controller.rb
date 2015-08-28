@@ -1,15 +1,13 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
+  # include SessionsHelper
 
   def create
-    @user = User.new
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to boards_path
+      render json: { success: "session created, user logged in" }, status: 201, serializer: UserSerializer
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render nothing: true, status: 401
     end
   end
 

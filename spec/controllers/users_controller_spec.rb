@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
 
   describe "POST #create" do
-
     context "when is successfully created" do
       before(:each) do
         @valid_attributes = { name: "Jon Snow", email: "north@thewall.com", password: "knowNothing", password_confirmation: "knowNothing" }

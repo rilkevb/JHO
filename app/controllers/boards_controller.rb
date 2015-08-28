@@ -1,7 +1,7 @@
 class BoardsController < ApplicationController
-  include SessionsHelper
+  # include SessionsHelper
 
-  before_action :redirect_unless_logged_in
+  # before_action :redirect_unless_logged_in
 
   def index
     @board = Board.new

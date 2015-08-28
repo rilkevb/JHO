@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -13,9 +12,17 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :welcome, only: [:index]
+
+  # Refactor to this later
+  # with_options only: [:create, :update, :delete] do |list_only|
+  #   list_only.resources :board_members
+  #   list_only.resources :card_assignments
+  #   list_only.resources :cards
+  #   list_only.resources :movements
+  # end
+
   resources :users, only: [:new, :create, :update, :destroy]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
   resources :board_members, only: [:create, :update, :destroy]
   resources :card_assignments, only: [:create, :update, :destroy]
   resources :boards, only: [:show, :index, :create, :update, :destroy]

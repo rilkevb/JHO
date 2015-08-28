@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
+
+# Use Rails as an API
+gem 'rails-api'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -30,8 +34,12 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 
 # Add for AngularJS
+# REMOVE THESE ONE CONVERTED TO API
 gem 'angular-rails-templates'
 gem 'bower-rails'
+
+# For serializing ActiveRecord models
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
