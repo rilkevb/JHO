@@ -6,7 +6,7 @@
 
 ## Implemented:
 
-- Rails API [deployed](jho.herokuapp.com) on Heroku
+- Rails API [deployed](https://jho.herokuapp.com) on Heroku
 - Rspec testing coverage: 1151 / 1157 LOC (99.48%) covered (via SimpleCov, as of 08/28/15)
 
 ## Pending:
