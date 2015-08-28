@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # include SessionsHelper
 
-  before_action :signed_in?, only: [:edit]
+  before_action :signed_in?, only: [:update]
 
   def create
     user = User.create(user_params)

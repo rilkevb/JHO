@@ -6,13 +6,7 @@ class ApplicationController < ActionController::API
   private
   #assumes signed_in is called first
     def current_user
-      ap "request" * 10
-      ap request["headers"]
-      ap request["rack_session"]
-      ap request.headers["name"]
-      p "USER" * 10
-      p "user is"
-      ap @current_user ||= User.find_by(name: request.headers["name"])
+      @current_user ||= User.find_by(name: request.headers["name"])
     end
     helper_method :current_user
 
