@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # include SessionsHelper
 
-  before_action :signed_in?, only: [:update]
+  before_action :signed_in?, only: [:edit]
 
   def create
     user = User.create(user_params)
@@ -24,9 +24,15 @@ class UsersController < ApplicationController
     if current_user.update(user_params)
       render json: current_user, status: 200, serializer: UserSerializer
     else
-      render json: { errors: { id: "used #{params[:id]} not found, failed to update", name: "user name can't be blank or must contain 3 or more characters", email: "email can't be blank and must be a valid format e.g., test@example.com",
-                               password: "password must be at least 6 characters and can't be blank" }
-                     }, status: 422
+      render json: {
+        errors: {
+          id: "used #{params[:id]} not found, failed to update",
+          name: "user name can't be blank or must contain 3 or more characters",
+          email: "email can't be blank and must be a valid format e.g., test@example.com",
+          password: "password must be at least 6 characters and can't be blank",
+          password_confirmation: "password confirmation can't be blank and must match password"
+        }
+      }, status: 422
     end
   end
 

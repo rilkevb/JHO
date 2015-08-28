@@ -57,8 +57,22 @@ RSpec.describe UsersController, type: :controller do
   describe "PUT #update" do
     context "when is successfully updated" do
       before(:each) do
-        @user = User.create({ name: "Lana Kane", email: "Lana@isis.com", password: "dangerZone", password_confirmation: "dangerZone" })
-        put :update, id: @user, user: { name: "Sterling Mallory Archer", email: "sterling@isis.com", password: "burtReynolds", password_confirmation: "burtReynolds"}
+        @user = User.create(name: "Lana Kane",
+                            email: "Lana@isis.com",
+                            password: "dangerZone",
+                            password_confirmation: "dangerZone")
+
+        request.headers['Accept'] = "application/json"
+        request.headers['Content-Type'] = "application/json"
+        request.headers['name'] = "#{@user.name}"
+        request.headers['auth_token'] = "#{@user.auth_token}"
+
+        @valid_attributes = { name: "Sterling Mallory Archer",
+                              email: "sterling@isis.com",
+                              password: "burtReynolds",
+                              password_confirmation: "burtReynolds" }
+
+        put(:update, id: @user, user: @valid_attributes)
       end
 
       it { is_expected.to respond_with 200 }
@@ -73,7 +87,14 @@ RSpec.describe UsersController, type: :controller do
     context "when is not updated" do
       before(:each) do
         @user = User.create({ name: "Lana Kane", email: "Lana@isis.com", password: "dangerZone", password_confirmation: "dangerZone" })
+
         @invalid_attributes = { name: nil, email: "foo", password: "bar", password_confirmation: "bar" }
+
+        request.headers['Accept'] = "application/json"
+        request.headers['Content-Type'] = "application/json"
+        request.headers['name'] = "#{@user.name}"
+        request.headers['auth_token'] = "#{@user.auth_token}"
+
         put :update, id: @user.id, user: @invalid_attributes
       end
 
