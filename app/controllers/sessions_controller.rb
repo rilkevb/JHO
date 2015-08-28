@@ -1,25 +1,12 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
-
-  def new
-    # For the shared error messages in the form
-    @user = User.new
-  end
+  # include SessionsHelper
 
   def create
-    @user = User.new
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to boards_path
+      render json: { success: "session created, user logged in" }, status: 201, serializer: UserSerializer
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render nothing: true, status: 401
     end
-  end
-
-  def destroy
-    log_out if logged_in?
-    redirect_to '/'
   end
 end
