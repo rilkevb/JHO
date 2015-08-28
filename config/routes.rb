@@ -23,15 +23,22 @@ Rails.application.routes.draw do
   #   list_only.resources :movements
   # end
 
-  resources :users, only: [:create, :update, :destroy]
-  resources :sessions, only: [:create]
-  resources :board_members, only: [:create, :update, :destroy]
-  resources :card_assignments, only: [:create, :update, :destroy]
-  resources :boards, only: [:show, :index, :create, :update, :destroy]
-  resources :lists, only: [:create, :update, :destroy]
-  resources :cards, only: [:create, :update, :destroy] do
-    resources :movements, only: [:create, :update, :destroy]
-    resources :tasks, only: [:index, :create, :update, :destroy]
+  # format: json allows us to not have to specify the format for API requests
+  # e.g., http://www.example.com/api/v1/projects.json
+  # vs http://www.example.com/api/v1/projects
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :sessions, only: [:create]
+      resources :boards, only: [:show, :index, :create, :update, :destroy]
+      resources :users, only: [:create, :update, :destroy]
+      resources :board_members, only: [:create, :update, :destroy]
+      resources :card_assignments, only: [:create, :update, :destroy]
+      resources :lists, only: [:create, :update, :destroy]
+      resources :cards, only: [:create, :update, :destroy] do
+        resources :movements, only: [:create, :update, :destroy]
+        resources :tasks, only: [:index, :create, :update, :destroy]
+      end
+    end
   end
 
 
