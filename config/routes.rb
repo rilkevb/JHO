@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
+  root "public#index"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -21,8 +23,8 @@ Rails.application.routes.draw do
   #   list_only.resources :movements
   # end
 
-  resources :users, only: [:new, :create, :update, :destroy]
-  resources :sessions, only: [:create, :destroy]
+  resources :users, only: [:create, :update, :destroy]
+  resources :sessions, only: [:create]
   resources :board_members, only: [:create, :update, :destroy]
   resources :card_assignments, only: [:create, :update, :destroy]
   resources :boards, only: [:show, :index, :create, :update, :destroy]
