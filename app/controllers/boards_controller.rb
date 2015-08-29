@@ -13,7 +13,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    user = User.find_by(id: session[:user_id])
+    user = User.find_by(email: request.headers["email"])
     @board.user_id = user.id
     if @board.save
       user.boards << @board
@@ -29,7 +29,7 @@ class BoardsController < ApplicationController
       render json: board, status: 200
     else
       render json: { errors: { id: "board #{params[:id]} not found, failed to update", name: "board name can't be blank or must contain 3 or more characters" }
-      }, status: 422
+                     }, status: 422
     end
   end
 
