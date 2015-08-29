@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   # format: json allows us to not have to specify the format for API requests
   # e.g., http://www.example.com/api/v1/projects.json
   # vs http://www.example.com/api/v1/projects
-  # namespace :api, defaults: {format: 'json'} do
+
+  # namespace :api, path: '/', constraints: { subdomain: 'api'}, defaults: {format: 'json'} do
   #   namespace :v1 do
   #     resources :sessions, only: [:create]
   #     resources :boards, only: [:show, :index, :create, :update, :destroy]
@@ -37,8 +38,9 @@ Rails.application.routes.draw do
   # with_options only: [:create, :update, :delete] do |list_only|
   #   list_only.resources :board_members
   #   list_only.resources :card_assignments
-  #   list_only.resources :cards
-  #   list_only.resources :movements
+  #   list_only.resources :cards do
+  #     list_only.resources :movements
+    # end
   # end
 
   resources :users, only: [:create, :update, :destroy]

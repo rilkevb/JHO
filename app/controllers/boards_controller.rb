@@ -1,11 +1,9 @@
 class BoardsController < ApplicationController
-  # include SessionsHelper
-
-  # before_action :redirect_unless_logged_in
 
   def index
     @board = Board.new
-    @boards = Board.where(user_id: session[:user_id])
+    @user = User.where(auth_token: request.headers["auth_token"]).first
+    @boards = Board.where(user_id: @user.id)
     render json: @boards, status: 200
   end
 
@@ -16,13 +14,12 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    user = User.find_by(id: session[:user_id])
-    @board.user_id = user.id
+    @user = User.where(auth_token: request.headers["auth_token"]).first
+    @board.user_id = @user.id
     if @board.save
-      user.boards << @board
       render json: @board, status: 201
     else
-      render json: {errors: { name: "Board name can't be blank or have fewer than 3 characters"} }, status: 422
+      render json: {errors: { user_id: "user_id not found, failed to create board", name: "Board name can't be blank or have fewer than 3 characters"} }, status: 422
     end
   end
 
@@ -32,7 +29,7 @@ class BoardsController < ApplicationController
       render json: board, status: 200
     else
       render json: { errors: { id: "board #{params[:id]} not found, failed to update", name: "board name can't be blank or must contain 3 or more characters" }
-      }, status: 422
+                     }, status: 422
     end
   end
 
@@ -48,6 +45,6 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(:name)
+    params.require(:board).permit(:name, :user_id)
   end
 end

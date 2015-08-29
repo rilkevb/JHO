@@ -10,6 +10,11 @@ RSpec.describe BoardMembersController, type: :controller do
     @boards = @user.boards
     @board = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
     @board_member_1 = BoardMember.create(board_id: @board.id, user_id: @user.id, admin: true)
+
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do

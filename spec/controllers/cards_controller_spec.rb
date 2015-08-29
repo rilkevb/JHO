@@ -12,6 +12,11 @@ RSpec.describe CardsController, :type => :controller do
     @board_1 = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
     @list = @board_1.lists.first
     @card = Card.create(list_id: @list.id, organization_name: "Dev Bootcamp")
+
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do
