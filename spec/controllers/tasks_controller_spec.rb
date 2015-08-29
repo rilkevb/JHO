@@ -11,9 +11,20 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe "GET #index" do
-    it "loads all of a card's tasks" do
+    before(:each) do
       get :index, card_id: @card.id
+    end
+
+    it "loads all of a card's tasks" do
       expect(assigns(:tasks)).to match_array(@tasks)
+    end
+
+    it { is_expected.to respond_with 200 }
+
+    it "renders a JSON with of all of the card's the tasks" do
+      body = response.body
+      tasks = @tasks.to_json
+      expect(body).to eql(tasks)
     end
   end
 
@@ -22,7 +33,7 @@ RSpec.describe TasksController, type: :controller do
     context "when is successfully created" do
       before(:each) do
         @valid_attributes = { title: "Some task", card_id: @card.id }
-        post(:create, @valid_attributes)
+        post(:create, card_id: @card.id, task: @valid_attributes)
       end
 
       it "responds with a success 200 code" do
@@ -31,7 +42,7 @@ RSpec.describe TasksController, type: :controller do
 
       it "increments the task count by 1" do
         expect{
-          post :create, @valid_attributes
+          post :create, card_id: @card.id, task: @valid_attributes
         }.to change{Task.count}.by(1)
       end
 
@@ -50,7 +61,7 @@ RSpec.describe TasksController, type: :controller do
     context "when is not created" do
       before(:each) do
         @invalid_attributes = { card_id: @card, title: "No" }
-        post(:create, @invalid_attributes)
+        post(:create, card_id: @card, task: @invalid_attributes)
       end
 
       it { is_expected.to respond_with 422 }
@@ -71,8 +82,8 @@ RSpec.describe TasksController, type: :controller do
 
     context "when is successfully updated" do
       before(:each) do
-        @valid_attributes = { title: "Nice task", card_id: @card.id, id: @original_task, completed: true }
-        put(:update, @valid_attributes)
+        @valid_attributes = { title: "Nice task", completed: true }
+        put(:update, card_id: @card.id, id: @original_task, task: @valid_attributes)
       end
 
       it "responds with a success 200 code" do
@@ -91,21 +102,21 @@ RSpec.describe TasksController, type: :controller do
 
       it "does not change the task count" do
         expect{
-          put(:update, @valid_attributes)
+          put(:update, card_id: @card.id, id: @original_task, task: @valid_attributes)
         }.to change{Task.count}.by(0)
       end
 
       it "renders a JSON of the updated task" do
         body = response.body
-        json_task = Task.where(id: @valid_attributes[:id]).first.to_json
+        json_task = Task.where(id: @original_task).first.to_json
         expect(body).to eql(json_task)
       end
     end
 
     context "when is not updated" do
       before(:each) do
-        @invalid_attributes = { title: "No", card_id: @card.id, id: @original_task.id }
-        put(:update, @invalid_attributes)
+        @invalid_attributes = { title: "No" }
+        put(:update, card_id: @card.id, id: @original_task, task: @invalid_attributes)
       end
 
       it { is_expected.to respond_with 422 }
