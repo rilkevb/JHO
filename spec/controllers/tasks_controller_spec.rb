@@ -8,6 +8,11 @@ RSpec.describe TasksController, type: :controller do
     @card = Card.create(organization_name: "Google", list_id: @list.id)
     @tasks = @card.tasks
     @original_task = Task.create(title: "Sample task", card_id: @card.id)
+
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
   end
 
   describe "GET #index" do

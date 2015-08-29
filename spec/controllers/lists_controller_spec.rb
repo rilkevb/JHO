@@ -9,6 +9,11 @@ RSpec.describe ListsController, type: :controller do
     session[:user_id] = @user.id
     @board = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
     @list = @board.lists.first
+
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do

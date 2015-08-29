@@ -1,26 +1,26 @@
 require "rails_helper"
 
 RSpec.describe BoardsController, :type => :controller do
-  before(:each) {
+  before(:each) do
     @user = User.create(name: "Doc Holliday",
                         email: "doc@holliday.com",
                         password: "password",
                         password_confirmation: "password")
-    session[:user_id] = @user.id
     @board_1 = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
     @board_2 = Board.create(name: "Project Manager Job Hunt", user_id: @user.id)
     @boards = @user.boards
-    @request_headers = {
-      "Accept" => "application/json",
-      "Content-Type" => "application/json"
-    }
-  }
 
-  after(:each) {
-    session.delete(:user_id)
-    @user.destroy
-    @board_1.destroy
-  }
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
+  end
+
+  # after(:each) do
+  #   @user.destroy
+  #   @board_1.destroy
+  #   @board_2.destroy
+  # end
 
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do
@@ -38,25 +38,25 @@ RSpec.describe BoardsController, :type => :controller do
       get :index
       body = response.body
       boards = @boards.to_json
-      expect(body).to match(boards)
+      expect(body).to eql(boards)
     end
   end
 
   describe "GET #show" do
     it "responds successfully with an HTTP 200 status code" do
       # The get method takes three arguments: a path, a set of HTTP parameters, and any additional headers to be included in the request.
-      get :show, { id: @board_1.id }, @request_headers
+      get :show, { id: @board_1.id }
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
 
     it "finds and loads the given board" do
-      get :show, { id: @board_1.id }, @request_headers
+      get :show, { id: @board_1.id }
       expect(assigns(:board)).to match(@board_1)
     end
 
     it "responds with a JSON of the board" do
-      get :show, { id: @board_1.id }, @request_headers
+      get :show, { id: @board_1.id }
       body = response.body
       json_board = @board_1.to_json
       expect(body).to match(json_board)
@@ -93,6 +93,7 @@ RSpec.describe BoardsController, :type => :controller do
 
       it "renders the json errors on why the board could not be created" do
         board_response = JSON.parse(response.body, symbolize_names: true)
+        expect(board_response[:errors][:user_id]).to include "not found"
         expect(board_response[:errors][:name]).to include "can't be blank"
       end
     end

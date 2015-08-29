@@ -11,6 +11,11 @@ RSpec.describe MovementsController, type: :controller do
     @card = Card.create(organization_name: "Google", list_id: @list.id)
     @movements = @card.movements
     @original_movement = Movement.create(current_list: "Find Advocate", card_id: @card.id)
+
+    request.headers['Accept'] = "application/json"
+    request.headers['Content-Type'] = "application/json"
+    request.headers['name'] = "#{@user.name}"
+    request.headers['auth_token'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do
