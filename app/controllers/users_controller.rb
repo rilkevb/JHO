@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # include SessionsHelper
 
   before_action :signed_in?, only: [:update]
 
