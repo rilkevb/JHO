@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
 
   def signed_in?
     @user = User.find_by(name: request.headers["name"])
-    if @user && @user.auth_token = request.headers["auth_token"]
+    if @user && @user.auth_token == request.headers["auth_token"]
       true
     else
       render nothing: true, status: 401
