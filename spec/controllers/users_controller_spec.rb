@@ -131,6 +131,11 @@ RSpec.describe UsersController, type: :controller do
     context "when is successfully destroyed" do
       before(:each) do
         @user = User.create(name: "Agent J", email: "Jay@MIB.com", password: "NoisyCricket", password_confirmation: "NoisyCricket")
+
+        request.headers['Accept'] = "application/json"
+        request.headers['Content-Type'] = "application/json"
+        request.headers['name'] = "#{@user.name}"
+        request.headers['auth_token'] = "#{@user.auth_token}"
       end
 
       it "changes the user count by -1" do
@@ -153,6 +158,13 @@ RSpec.describe UsersController, type: :controller do
 
     context "when it fails to find a user to destroy" do
       before(:each) do
+        @user = User.create(name: "Agent J", email: "Jay@MIB.com", password: "NoisyCricket", password_confirmation: "NoisyCricket")
+
+        request.headers['Accept'] = "application/json"
+        request.headers['Content-Type'] = "application/json"
+        request.headers['name'] = "#{@user.name}"
+        request.headers['auth_token'] = "#{@user.auth_token}"
+
         delete :destroy, id: "foo"
       end
 

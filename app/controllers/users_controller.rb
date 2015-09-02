@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in?, only: [:update]
+  before_action :signed_in?, except: [:create]
 
   def create
     user = User.create(user_params)
