@@ -32,5 +32,16 @@ module JHO
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+      allow do
+        origins '*' # Switch this to the production URL once ready
+        resource '*',
+          :headers => :any,
+          :methods => [:get, :post, :delete, :put, :options, :head],
+          :credentials => true,
+          :expose  => ['name', 'auth_token']
+      end
+    end
   end
 end
