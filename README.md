@@ -7,14 +7,13 @@
 ## Implemented:
 
 - Rails API [deployed](https://jho.herokuapp.com) on Heroku
-- Rspec testing coverage: 1151 / 1157 LOC (99.48%) covered (via SimpleCov, as of 08/28/15)
+- Rspec testing coverage: 1193 / 1199 LOC (99.5%) covered. (via SimpleCov, as of 09/01/15)
 
 ## Pending:
 
 - Angular Client features (in progress)
 - Angular unit testing with Karma and Jasmine
 - mobile-first responsive design (in progress)
-- API documentation
 - Database indexing
 - API namespacing and consequent test refactor
 - External API calls or data scraping
