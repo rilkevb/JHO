@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+#
+gem 'jwt'
 
 # Handle CORS requests from JHO client applications
 gem 'rack-cors', :require => 'rack/cors'

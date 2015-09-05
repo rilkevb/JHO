@@ -79,6 +79,7 @@ GEM
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
+    jwt (1.4.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -205,6 +206,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   json_spec
+  jwt
   pg
   puma
   rack-cors
