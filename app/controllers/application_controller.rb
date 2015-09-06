@@ -13,10 +13,11 @@ class ApplicationController < ActionController::API
   helper_method :current_user
 
   def signed_in?
-    received_token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
+    token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
     #request.env["HTTP_NAME"] #=> returns the name
     @user = User.find_by(name: request.env["HTTP_NAME"])
-    if @user && @user.auth_token == received_token
+    if @user && @user.auth_token == token
+    # if authenticate(user, token)
       true
     else
       render nothing: true, status: 401
@@ -24,16 +25,17 @@ class ApplicationController < ActionController::API
   end
   helper_method :signed_in?
 
-  # def authenticate
-  #   decode_token
-  #   verify_token
-  # end
+  def authenticate(user, token)
+    user.auth_token == decode(token)[0]
+  end
 
-  # def verify_token
-  #   # https://github.com/jwt/ruby-jwt
-  # end
+  def encode(payload)
+    self.rsa_private = OpenSSL::PKey::RSA.generate 2048
+    self.rsa_public = rsa_private.public_key
+    token = JWT.encode(payload, self.rsa_private, 'RS256')
+  end
 
-  # def decode_token
-  #   # https://github.com/jwt/ruby-jwt
-  # end
+  def decode(token)
+    decoded_token = JWT.decode(token, self.rsa_public)
+  end
 end
