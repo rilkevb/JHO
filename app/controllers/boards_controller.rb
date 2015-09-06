@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
 
   def index
     @board = Board.new
-    @user = User.where(auth_token: request.headers["auth_token"]).first
+    @user = User.where(auth_token: request.env["HTTP_AUTH_TOKEN"]).first
     @boards = Board.where(user_id: @user.id)
     render json: @boards, status: 200
   end
@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    @user = User.where(auth_token: request.headers["auth_token"]).first
+    @user = User.where(auth_token: request.env["HTTP_AUTH_TOKEN"]).first
     @board.user_id = @user.id
     if @board.save
       render json: @board, status: 201

@@ -14,8 +14,8 @@ RSpec.describe CardAssignmentsController, type: :controller do
 
     request.headers['Accept'] = "application/json"
     request.headers['Content-Type'] = "application/json"
-    request.headers['name'] = "#{@user.name}"
-    request.headers['auth_token'] = "#{@user.auth_token}"
+    request.env['HTTP_NAME'] = "#{@user.name}"
+    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do
@@ -73,7 +73,7 @@ RSpec.describe CardAssignmentsController, type: :controller do
         it "changes card_assignment count by 0" do
           expect {
             put(:update, {id: @card_assignment.id, card_assignment: @valid_attributes})
-            }.to change{ CardAssignment.count}.by(0)
+          }.to change{ CardAssignment.count}.by(0)
         end
 
         it "renders a JSON of the created CardAssignment" do
@@ -113,7 +113,7 @@ RSpec.describe CardAssignmentsController, type: :controller do
 
           it "renders a success JSON" do
             body = JSON.parse(response.body, symbolize_names: true)
-          expect(body).to have_key(:success)
+            expect(body).to have_key(:success)
           end
 
           # it "changes Card Assignment count by -1" do

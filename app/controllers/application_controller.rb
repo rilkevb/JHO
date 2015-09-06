@@ -13,12 +13,27 @@ class ApplicationController < ActionController::API
   helper_method :current_user
 
   def signed_in?
-    @user = User.find_by(name: request.headers["name"])
-    if @user && @user.auth_token == request.headers["auth_token"]
+    received_token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
+    #request.env["HTTP_NAME"] #=> returns the name
+    @user = User.find_by(name: request.env["HTTP_NAME"])
+    if @user && @user.auth_token == received_token
       true
     else
       render nothing: true, status: 401
     end
   end
   helper_method :signed_in?
+
+  # def authenticate
+  #   decode_token
+  #   verify_token
+  # end
+
+  # def verify_token
+  #   # https://github.com/jwt/ruby-jwt
+  # end
+
+  # def decode_token
+  #   # https://github.com/jwt/ruby-jwt
+  # end
 end
