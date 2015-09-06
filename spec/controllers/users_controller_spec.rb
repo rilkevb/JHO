@@ -64,8 +64,8 @@ RSpec.describe UsersController, type: :controller do
 
         request.headers['Accept'] = "application/json"
         request.headers['Content-Type'] = "application/json"
-        request.headers['name'] = "#{@user.name}"
-        request.headers['auth_token'] = "#{@user.auth_token}"
+        request.env['HTTP_NAME'] = "#{@user.name}"
+        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
 
         @valid_attributes = { name: "Sterling Mallory Archer",
                               email: "sterling@isis.com",
@@ -92,8 +92,8 @@ RSpec.describe UsersController, type: :controller do
 
         request.headers['Accept'] = "application/json"
         request.headers['Content-Type'] = "application/json"
-        request.headers['name'] = "#{@user.name}"
-        request.headers['auth_token'] = "#{@user.auth_token}"
+        request.env['HTTP_NAME'] = "#{@user.name}"
+        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
 
         put :update, id: @user.id, user: @invalid_attributes
       end
@@ -134,8 +134,8 @@ RSpec.describe UsersController, type: :controller do
 
         request.headers['Accept'] = "application/json"
         request.headers['Content-Type'] = "application/json"
-        request.headers['name'] = "#{@user.name}"
-        request.headers['auth_token'] = "#{@user.auth_token}"
+        request.env['HTTP_NAME'] = "#{@user.name}"
+        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
       end
 
       it "changes the user count by -1" do
@@ -162,8 +162,8 @@ RSpec.describe UsersController, type: :controller do
 
         request.headers['Accept'] = "application/json"
         request.headers['Content-Type'] = "application/json"
-        request.headers['name'] = "#{@user.name}"
-        request.headers['auth_token'] = "#{@user.auth_token}"
+        request.env['HTTP_NAME'] = "#{@user.name}"
+        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
 
         delete :destroy, id: "foo"
       end

@@ -13,8 +13,8 @@ RSpec.describe BoardMembersController, type: :controller do
 
     request.headers['Accept'] = "application/json"
     request.headers['Content-Type'] = "application/json"
-    request.headers['name'] = "#{@user.name}"
-    request.headers['auth_token'] = "#{@user.auth_token}"
+    request.env['HTTP_NAME'] = "#{@user.name}"
+    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
   end
 
   describe "POST #create" do

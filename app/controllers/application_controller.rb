@@ -15,10 +15,7 @@ class ApplicationController < ActionController::API
   def signed_in?
     received_token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
     #request.env["HTTP_NAME"] #=> returns the name
-    request.headers["name"] #=> returns the name
-    #p request.headers["auth_token"] #=> returns nil
-    @user = User.find_by(name: request.headers["name"])
-    @user.auth_token
+    @user = User.find_by(name: request.env["HTTP_NAME"])
     if @user && @user.auth_token == received_token
       true
     else
