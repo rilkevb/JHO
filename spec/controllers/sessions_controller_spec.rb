@@ -39,8 +39,13 @@ RSpec.describe SessionsController, type: :controller do
         post :create, session: { email: "sing@song.com" , password: "differentpassword" }
       end
 
-      it "responds with a 401 unauthorized status" do
-        expect(response).to have_http_status 401
+      it "responds with a 422 status" do
+        expect(response).to have_http_status 422
+      end
+
+      it "renders an errors JSON" do
+        session_response = JSON.parse(response.body, symbolize_names: true)
+        expect(session_response).to have_key(:errors)
       end
     end
   end

@@ -13,9 +13,11 @@ class ApplicationController < ActionController::API
   helper_method :current_user
 
   def signed_in?
-    token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
-    #request.env["HTTP_NAME"] #=> returns the name
-    @user = User.find_by(name: request.env["HTTP_NAME"])
+    p token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
+    p request.env["HTTP_NAME"] #=> returns the name
+    p @user = User.find_by(name: request.env["HTTP_NAME"])
+    p @user.auth_token
+    p token == @user.auth_token
     if @user && @user.auth_token == token
     # if authenticate(user, token)
       true

@@ -5,7 +5,12 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       render json: user, status: 201, serializer: UserSerializer
     else
-      render nothing: true, status: 401
+      render json: {
+        errors: {
+          email: "Your email address was incorrect or not recognized.",
+          password: "Your password was incorrect or not recognized."
+        }
+      }, status: 422
     end
   end
 end
