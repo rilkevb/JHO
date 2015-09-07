@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.save
+      # generate JWT
+      # return JWT in response
       render json: user, status: 201, serializer: UserSerializer
     else
       render json: {

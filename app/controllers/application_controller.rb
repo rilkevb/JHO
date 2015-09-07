@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
   helper_method :signed_in?
 
   def authenticate(user, token)
-    user.auth_token == decode(token)[0]
+    user.auth_token == decode(token)
   end
 
   def encode(payload)
@@ -39,5 +39,13 @@ class ApplicationController < ActionController::API
 
   def decode(token)
     decoded_token = JWT.decode(token, self.rsa_public)
+  end
+
+  def verify(token)
+    # check token validity and refresh if valid
+  end
+
+  def refresh_token
+    # refresh an existing token's expiration date
   end
 end
