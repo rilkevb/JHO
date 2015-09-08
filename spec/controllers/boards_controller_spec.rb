@@ -10,17 +10,9 @@ RSpec.describe BoardsController, :type => :controller do
     @board_2 = Board.create(name: "Project Manager Job Hunt", user_id: @user.id)
     @boards = @user.boards
 
-    request.headers['Accept'] = "application/json"
-    request.headers['Content-Type'] = "application/json"
-    request.env['HTTP_NAME'] = "#{@user.name}"
-    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+    token = AuthToken.issue_token({ user_id: @user.id })
+    request.headers['Authorization'] = token
   end
-
-  # after(:each) do
-  #   @user.destroy
-  #   @board_1.destroy
-  #   @board_2.destroy
-  # end
 
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do

@@ -12,10 +12,8 @@ RSpec.describe MovementsController, type: :controller do
     @movements = @card.movements
     @original_movement = Movement.create(current_list: "Find Advocate", card_id: @card.id)
 
-    request.headers['Accept'] = "application/json"
-    request.headers['Content-Type'] = "application/json"
-    request.env['HTTP_NAME'] = "#{@user.name}"
-    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+    token = AuthToken.issue_token({ user_id: @user.id })
+    request.headers['Authorization'] = token
   end
 
   describe "POST #create" do

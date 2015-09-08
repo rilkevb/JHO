@@ -9,10 +9,8 @@ RSpec.describe TasksController, type: :controller do
     @tasks = @card.tasks
     @original_task = Task.create(title: "Sample task", card_id: @card.id)
 
-    request.headers['Accept'] = "application/json"
-    request.headers['Content-Type'] = "application/json"
-    request.env['HTTP_NAME'] = "#{@user.name}"
-    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+    token = AuthToken.issue_token({ user_id: @user.id })
+    request.headers['Authorization'] = token
   end
 
   describe "GET #index" do

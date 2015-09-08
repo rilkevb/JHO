@@ -20,7 +20,7 @@ RSpec.describe UsersController, type: :controller do
       it "renders a JSON of the created user" do
         body = response.body
         user = User.last.to_json
-        expect(body).to eql user
+        expect(body).to include user
       end
     end
 
@@ -62,10 +62,8 @@ RSpec.describe UsersController, type: :controller do
                             password: "dangerZone",
                             password_confirmation: "dangerZone")
 
-        request.headers['Accept'] = "application/json"
-        request.headers['Content-Type'] = "application/json"
-        request.env['HTTP_NAME'] = "#{@user.name}"
-        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+        token = AuthToken.issue_token({ user_id: @user.id })
+        request.headers['Authorization'] = token
 
         @valid_attributes = { name: "Sterling Mallory Archer",
                               email: "sterling@isis.com",
@@ -90,10 +88,8 @@ RSpec.describe UsersController, type: :controller do
 
         @invalid_attributes = { name: nil, email: "foo", password: "bar", password_confirmation: "bar" }
 
-        request.headers['Accept'] = "application/json"
-        request.headers['Content-Type'] = "application/json"
-        request.env['HTTP_NAME'] = "#{@user.name}"
-        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+        token = AuthToken.issue_token({ user_id: @user.id })
+        request.headers['Authorization'] = token
 
         put :update, id: @user.id, user: @invalid_attributes
       end
@@ -132,10 +128,8 @@ RSpec.describe UsersController, type: :controller do
       before(:each) do
         @user = User.create(name: "Agent J", email: "Jay@MIB.com", password: "NoisyCricket", password_confirmation: "NoisyCricket")
 
-        request.headers['Accept'] = "application/json"
-        request.headers['Content-Type'] = "application/json"
-        request.env['HTTP_NAME'] = "#{@user.name}"
-        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+        token = AuthToken.issue_token({ user_id: @user.id })
+        request.headers['Authorization'] = token
       end
 
       it "changes the user count by -1" do
@@ -160,10 +154,8 @@ RSpec.describe UsersController, type: :controller do
       before(:each) do
         @user = User.create(name: "Agent J", email: "Jay@MIB.com", password: "NoisyCricket", password_confirmation: "NoisyCricket")
 
-        request.headers['Accept'] = "application/json"
-        request.headers['Content-Type'] = "application/json"
-        request.env['HTTP_NAME'] = "#{@user.name}"
-        request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+        token = AuthToken.issue_token({ user_id: @user.id })
+        request.headers['Authorization'] = token
 
         delete :destroy, id: "foo"
       end
