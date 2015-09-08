@@ -10,10 +10,8 @@ RSpec.describe ListsController, type: :controller do
     @board = Board.create(name: "Software Developer Job Hunt", user_id: @user.id)
     @list = @board.lists.first
 
-    request.headers['Accept'] = "application/json"
-    request.headers['Content-Type'] = "application/json"
-    request.env['HTTP_NAME'] = "#{@user.name}"
-    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+    token = AuthToken.issue_token({ user_id: @user.id })
+    request.headers['Authorization'] = token
   end
 
   describe "POST #create" do

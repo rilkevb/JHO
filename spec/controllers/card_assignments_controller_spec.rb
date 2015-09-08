@@ -12,10 +12,8 @@ RSpec.describe CardAssignmentsController, type: :controller do
     @list = @board_1.lists.first
     @card = Card.create(list_id: @list.id, organization_name: "Dev Bootcamp")
 
-    request.headers['Accept'] = "application/json"
-    request.headers['Content-Type'] = "application/json"
-    request.env['HTTP_NAME'] = "#{@user.name}"
-    request.env['HTTP_AUTH_TOKEN'] = "#{@user.auth_token}"
+    token = AuthToken.issue_token({ user_id: @user.id })
+    request.headers['Authorization'] = token
   end
 
   describe "POST #create" do
