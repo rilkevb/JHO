@@ -1,15 +1,15 @@
 class SessionsController < ApplicationController
 
-  before_action :signed_in?, except: [:create]
+  before_action :authenticate, except: [:create]
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      # check if JWT received in request
-      # if no JWT, generate JWT
-      # if existing JWT, refresh JWT
+      # generate JWT, "logging in" user
+      token = AuthToken.issue_token({ user_id: user.id })
       # return JWT in response
-      render json: user, status: 201, serializer: UserSerializer
+      render json: { user: user,
+                     token: token }, status: 201, serializer: UserSerializer
     else
       render json: {
         errors: {

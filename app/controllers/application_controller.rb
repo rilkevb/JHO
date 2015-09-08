@@ -2,50 +2,20 @@ class ApplicationController < ActionController::API
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
+  require 'auth_token'
 
-  before_action :signed_in?
+  before_action :authenticate
 
   private
-  #assumes signed_in is called first
-  def current_user
-    @current_user ||= User.find_by(name: request.headers["name"])
-  end
-  helper_method :current_user
 
-  def signed_in?
-    p token = request.env["HTTP_AUTH_TOKEN"] #=> returns the token
-    p request.env["HTTP_NAME"] #=> returns the name
-    p @user = User.find_by(name: request.env["HTTP_NAME"])
-    p @user.auth_token
-    p token == @user.auth_token
-    if @user && @user.auth_token == token
-    # if authenticate(user, token)
-      true
-    else
-      render nothing: true, status: 401
+  def authenticate
+    begin
+      token = request.headers['Authorization'].split(' ').last
+      payload, header = AuthToken.valid?(token)
+      p payload, header
+      @current_user = User.find_by(id: payload['user_id'])
+    rescue
+      render json: { error: 'Authorization header not valid'}, status: :unauthorized
     end
-  end
-  helper_method :signed_in?
-
-  def authenticate(user, token)
-    user.auth_token == decode(token)
-  end
-
-  def encode(payload)
-    self.rsa_private = OpenSSL::PKey::RSA.generate 2048
-    self.rsa_public = rsa_private.public_key
-    token = JWT.encode(payload, self.rsa_private, 'RS256')
-  end
-
-  def decode(token)
-    decoded_token = JWT.decode(token, self.rsa_public)
-  end
-
-  def verify(token)
-    # check token validity and refresh if valid
-  end
-
-  def refresh_token
-    # refresh an existing token's expiration date
   end
 end

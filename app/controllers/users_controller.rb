@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in?, except: [:create]
+  before_action :authenticate, except: [:create]
 
   def create
     user = User.create(user_params)
     if user.save
       # generate JWT
+      ap token = AuthToken.issue_token({ user_id: user.id })
       # return JWT in response
-      render json: user, status: 201, serializer: UserSerializer
+      render json: { user: user,
+                     token: token }, status: 201, serializer: UserSerializer
     else
       render json: {
         errors: {
@@ -22,8 +24,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
-      render json: current_user, status: 200, serializer: UserSerializer
+    # @current_user is set in ApplicationController#authenticate
+    if @current_user.update(user_params)
+      render json: @current_user, status: 200, serializer: UserSerializer
     else
       render json: {
         errors: {
