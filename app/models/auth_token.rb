@@ -1,18 +1,13 @@
 require 'jwt'
 module AuthToken
-  def AuthToken.issue_token(payload)
-    # hmac_secret = ENV["JWT_SECRET"]
-    # p hmac_secret
-    # set expiration to 30 days.
-    JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
+  def AuthToken.issue_token(payload, exp=30.days.from_now)
+    payload[:exp] = exp.to_i
+    p JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 
   def AuthToken.valid?(token)
-    # check token validity
-    # hmac_secret = ENV["JWT_SECRET"]
-    # p hmac_secret
     begin
-      JWT.decode(token, Rails.application.secrets.secret_key_base)
+      p JWT.decode(token, Rails.application.secrets.secret_key_base, verify=true)
     rescue
       false
     end

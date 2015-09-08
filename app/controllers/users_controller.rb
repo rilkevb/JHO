@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     user = User.create(user_params)
     if user.save
       # generate JWT
-      ap token = AuthToken.issue_token({ user_id: user.id })
+      token = AuthToken.issue_token({ user_id: user.id })
       # return JWT in response
       render json: { user: user,
                      token: token }, status: 201, serializer: UserSerializer
