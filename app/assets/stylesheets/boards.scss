@@ -2,62 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-  #sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9 {
-    border: 1px solid #eee;
-    width: 142px;
-    min-height: 20px;
-    list-style-type: none;
-    margin: 0;
-    padding: 5px 0 0 0;
-    float: left;
-    margin-right: 10px;
-  }
-  #sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9 {
-    margin: 0 5px 5px 5px;
-    padding: 5px;
-    font-size: 1.2em;
-    width: 140px;
-  }
-  .list {
-    display: inline-table ;
-    width: 150px;
-    height: 200px;
-    margin-right: 0px;
-    margin-left: 0px;
-    border: 2px black solid;
-  }
-  .board {
-    /*border: 2px red solid;*/
-    width: 1550px;
-    /*overflow: scroll;*/
+/* boards */
+.board-button {
+  border: 1px black solid;
+  background-color: #f7f7f7;
+  height: 100px;
+  width: 100px;
+
+  div { opacity: 0.3; }
+
+  a {
+    color: #00b0ff;
+    text-decoration: none;
+    height: inherit;
+    width: inherit;
   }
 
-.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-
-.card-modal {
-  display: none;
-}
-
-.star-bar {
-  // display: block;
-  float: left;
-  // height: 1rem;
-}
-
-.organization-name {
-  float: left;
-}
-
-span {
-    zoom:0.29;
-    -moz-transform:scale(0.29);
-    -moz-transform-origin: 0 0;
-}
-
-li:after {
-  visibility: hidden;
-  display: block;
-  content: "";
-  clear: both;
-  height: 0;
+  .board-button-name {
+    font-family: Helvetica, sans-serif;
+  }
 }

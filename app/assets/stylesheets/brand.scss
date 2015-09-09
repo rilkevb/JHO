@@ -1,0 +1,37 @@
+/*
+/////////////////
+// Variables
+/////////////////
+*/
+
+$brand-primary: #8fce86;
+$brand-secondary: #0d355a;
+$text-primary: #ddd;
+$link-primary: #00b0ff;
+$link-secondary: red;
+
+/////////////////
+
+body {
+    background-color: $brand-primary;
+}
+
+// Some of this can probably be extracted into
+// links.scss or something similar
+a {
+    color: $link-primary;
+    text-decoration: none;
+}
+
+a:hover {
+    color: $link-secondary;
+}
+
+li {
+    list-style-type: none;
+    .active-nav-link {
+        box-shadow: 4px 4px 5px red;
+        font-weight: bold;
+        background-color: $brand-secondary;
+    }
+}

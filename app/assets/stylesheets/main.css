@@ -1,0 +1,17 @@
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.list {
+  border: 1px red solid;
+  float: left;
+}
+
+.footer {
+  clear: both;
+}
+
+.card {
+  border: 1px black solid;
+}

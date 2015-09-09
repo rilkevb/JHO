@@ -15,6 +15,24 @@
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
 #
+
+# Adding SimpleCov to read test coverage
+require 'simplecov'
+require 'json_spec'
+SimpleCov.start
+
+# Adding to assist with testing JSON
+RSpec.configure do |config|
+  config.include JsonSpec::Helpers
+end
+
+# Default exclusions, for info see:
+# https://github.com/collectiveidea/json_spec
+JsonSpec.configure do
+  exclude_keys "created_at", "updated_at"
+end
+
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
