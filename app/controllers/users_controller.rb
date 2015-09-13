@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     else
       render json: {
         errors: {
+          id: "used #{params[:id]} not found, failed to update",
           name: "user name can't be blank or must contain 3 or more characters",
           email: "email can't be blank and must be a valid format e.g., test@example.com",
           password: "password must be at least 6 characters and can't be blank",

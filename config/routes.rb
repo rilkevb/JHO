@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     # end
   # end
 
-  resources :users, only: [:create, :update, :destroy]
+  resources :users, except: [:index, :show, :new, :edit]
   resources :sessions, only: [:create]
   resources :board_members, only: [:create, :update, :destroy]
   resources :card_assignments, only: [:create, :update, :destroy]
