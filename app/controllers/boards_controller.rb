@@ -2,9 +2,8 @@ class BoardsController < ApplicationController
   # @current_user is set in ApplicationController#authenticate
 
   def index
-    @board = Board.new
-    @boards = Board.where(user_id: @current_user.id)
-    render json: @boards, status: 200
+    board = @current_user.boards.first
+    render json: board, status: 200
   end
 
   def show
