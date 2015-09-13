@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
 
   after_validation :ensure_token
 
+  after_create :make_first_board
+
+  def make_first_board
+    if self.boards.empty?
+      self.boards.create(name: "My First Job Board")
+    end
+  end
+
   def ensure_token
     self.auth_token = generate_token
   end
