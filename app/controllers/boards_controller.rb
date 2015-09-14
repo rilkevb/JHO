@@ -23,6 +23,9 @@ class BoardsController < ApplicationController
       board_hash["lists"][index]['cards'] = list.cards
     end
 
+    # refactoring for efficiency
+    # board.lists.include(:cards).to_json
+
     # definitely should refactor this to use ActiveModel::Serializer
     render json: { board: board_hash, lists: lists, cards: cards }
   end
