@@ -1,8 +1,11 @@
 class MovementsController < ApplicationController
   def create
     card = Card.where(id: params[:card_id]).first
-    movement = Movement.new(card_id: card.id, current_list: params[:current_list])
-    # use save! if debugging in development
+    # change card.list_id to the new list
+    card.update(list_id: params[:list_id])
+    # create movement with the name of the card's now current list
+    movement = Movement.new(card_id: card.id, current_list: card.list.name)
+
     if movement.save
       render json: movement, status: 200
     else
