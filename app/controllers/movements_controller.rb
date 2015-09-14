@@ -2,7 +2,7 @@ class MovementsController < ApplicationController
   def create
     card = Card.where(id: params[:card_id]).first
     # change card.list_id to the new list
-    card.update(list_id: params[:list_id])
+    card.update(list_id: params[:card][:list_id])
     # create movement with the name of the card's now current list
     movement = Movement.new(card_id: card.id, current_list: card.list.name)
 
@@ -46,7 +46,7 @@ class MovementsController < ApplicationController
     # params.require(:movement).permit(:card_id, :current_list)
     # Not using require here because that wants movement to be included in params
     # Still need to investigate more about strong params, especially re:
-    params.permit(:card_id, :current_list)
+    params.permit(:card_id, :current_list, :list_id)
   end
 
   # consider defining error messages here to provide dynamic ones and prevent tightly coupled tests
