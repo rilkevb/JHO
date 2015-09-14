@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   # Can also use delete, which ignores callbacks (deletes from the database directly)
 
   validates :list_id, presence: true, numericality: { only_integer: true }
-  validates :organization_name, presence: true, length: { minimum: 3 }
+  validates :title, presence: true, length: { minimum: 3 }
 
   # schema attributes
       # :list_id,

@@ -1,0 +1,13 @@
+Classs TempTracker
+
+    def initialize()
+      @date_and_temps_hash = Hash.new
+    end
+
+    def insert(date,temp)
+
+    end
+
+
+
+end

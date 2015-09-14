@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     # end
   # end
 
+  get '/dashboard' => 'boards#dashboard'
+
   resources :users, except: [:index, :show, :new, :edit]
   resources :sessions, only: [:create]
   resources :board_members, only: [:create, :update, :destroy]

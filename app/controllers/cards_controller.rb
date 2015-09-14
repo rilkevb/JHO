@@ -6,6 +6,8 @@ class CardsController < ApplicationController
   # end
 
   def create
+    p "#*"*25
+    p params
     card = Card.new(card_params)
     if card.save
       render json: card, status: 201

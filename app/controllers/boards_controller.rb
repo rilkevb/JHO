@@ -2,12 +2,14 @@ class BoardsController < ApplicationController
   # @current_user is set in ApplicationController#authenticate
 
   def index
-    board = @current_user.boards.first
-    render json: board, status: 200
+    # board = @current_user.boards.first
+    # render json: board, status: 200
+    redirect :show
   end
 
-  def show
-    board = Board.where(id: params[:id]).first
+  def dashboard
+
+    board = @current_user.boards.first
     lists = board.lists
     cards = lists.map { |list| list.cards }
 
