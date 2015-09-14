@@ -6,8 +6,6 @@ class CardsController < ApplicationController
   # end
 
   def create
-    p "#*"*25
-    p params
     card = Card.new(card_params)
     if card.save
       render json: card, status: 201
@@ -20,20 +18,12 @@ class CardsController < ApplicationController
 
   def update
     card = Card.where(id: params[:id]).first
-    if card.list_id != card_params[:list_id]
-      # refactor this into Card class after_save callback later
-      card.list_id = card_params[:list_id]
-      card.save
-      card.movements.create(current_list: card.list.name)
+    if card.update_attributes(card_params)
       render json: card, status: 200
     else
-      if card.update_attributes(card_params)
-        render json: card, status: 200
-      else
-        render json: { errors: {id: "card #{params[:id]} not found, failed to update",
-                                organization_name: "organization_name can't be blank and must have 3 or more characters "}
-                       }, status: 422
-      end
+      render json: { errors: {id: "card #{params[:id]} not found, failed to update",
+                              organization_name: "organization_name can't be blank and must have 3 or more characters "}
+                     }, status: 422
     end
   end
 
