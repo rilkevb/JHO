@@ -9,15 +9,19 @@ class Card < ActiveRecord::Base
   validates :title, presence: true, length: { minimum: 3 }
 
   # schema attributes
-      # :list_id,
-      # :organization_name,
-      # :organization_summary,
-      # :position_applied_for,
-      # :position_description,
-      # :advocate,
-      # :tech_stack,
-      # :recent_articles,
-      # :glassdoor_rating,
-      # :title,
-      # :description
+  # :list_id,
+  # :organization_name,
+  # :organization_summary,
+  # :position_applied_for,
+  # :position_description,
+  # :advocate,
+  # :tech_stack,
+  # :recent_articles,
+  # :glassdoor_rating,
+  # :title,
+  # :description
+  # "points",               default: 1
+  # "priority",             default: 1
+  # "next_task"
+  # "archived",             default: false
 end

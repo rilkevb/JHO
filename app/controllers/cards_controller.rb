@@ -42,6 +42,6 @@ class CardsController < ApplicationController
   private
   def card_params
     # which of these can we get rid of?
-    params.require(:card).permit(:list_id, :organization_name, :organization_summary, :position_description, :position_applied_for, :advocate, :tech_stack, :recent_articles, :glassdoor_rating, :title, :description)
+    params.require(:card).permit(:list_id, :organization_name, :organization_summary, :position_description, :position_applied_for, :advocate, :tech_stack, :recent_articles, :glassdoor_rating, :title, :description, :points, :priority, :next_task, :archived)
   end
 end
