@@ -8,12 +8,13 @@ class Board < ActiveRecord::Base
   after_create :generate_board_lists
 
   def generate_board_lists
+    # Update these names to more accurately depict user / hiring
     list_names = ["Organizations of Interest", "Find Advocate", "Advocate Found",
     "Application", "Cultural", "Code Challenge", "Tech Screen",
     "Onsite", "Negotiation", "Outcome"]
 
     list_names.each_with_index do |name,index|
-      self.lists.create(name: name, position_id: (index+1) )
+      self.lists.create(name: name, position_id: index )
     end
   end
 end

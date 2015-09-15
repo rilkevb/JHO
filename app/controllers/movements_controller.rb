@@ -3,11 +3,14 @@ class MovementsController < ApplicationController
     card = Card.where(id: params[:card_id]).first
     # change card.list_id to the new list
     card.update(list_id: params[:card][:list_id])
+    # set priority score based on that
+    card.recalculate_priority
+
     # create movement with the name of the card's now current list
     movement = Movement.new(card_id: card.id, current_list: card.list.name)
 
     if movement.save
-      render json: movement, status: 200
+      render json: { movement: movement, card: card } , status: 200
     else
       render json: { errors:
                      {  current_list: "current_list parameter can't be blank and must contain 3 or more characters" }
