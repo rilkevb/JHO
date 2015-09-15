@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   # end
 
   get '/dashboard' => 'boards#dashboard'
+  get '/today' => 'cards#today'
 
   resources :users, except: [:index, :show, :new, :edit]
   resources :sessions, only: [:create]
