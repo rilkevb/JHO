@@ -1,5 +1,24 @@
 class CardsController < ApplicationController
 
+  def today
+    # fetch highest priority cards from all lists
+    # this much method chaining seems like it wants some refactoring
+    cards = []
+    @current_user.boards.first.lists.map do |list|
+      if list.cards.empty?
+        next
+      else
+        cards << list.cards
+      end
+    end
+    p cards.flatten!
+    # using #sort_by and #take because you get an array from each
+
+    prioritized_cards = cards.sort_by(&:priority)#.sort_by(&:updated_at)
+    todays_cards = prioritized_cards.take(7)
+    render json: todays_cards, status: 200
+  end
+
   # def show
   #   card = Card.find_by(id: params[:id])
   #   render json: card

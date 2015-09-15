@@ -8,26 +8,9 @@ class BoardsController < ApplicationController
   end
 
   def dashboard
-
     board = @current_user.boards.first
-    lists = board.lists
-    cards = lists.map { |list| list.cards }
-
-    # create a hash of the board's attributes
-    board_hash = board.attributes
-    board_hash["lists"] = []
-
-    # build out nested board hash by adding lists and cards
-    lists.each_with_index do |list, index|
-      board_hash["lists"] << list.attributes
-      board_hash["lists"][index]['cards'] = list.cards
-    end
-
-    # refactoring for efficiency
-    # board.lists.include(:cards).to_json
-
-    # definitely should refactor this to use ActiveModel::Serializer
-    render json: { board: board_hash, lists: lists, cards: cards }
+    dashboard = board.build_dashboard
+    render json: dashboard, status: 200
   end
 
   def create
