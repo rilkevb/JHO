@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20150915011113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_keys", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "board_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "board_id"
@@ -53,13 +46,13 @@ ActiveRecord::Schema.define(version: 20150915011113) do
     t.string   "tech_stack"
     t.text     "recent_articles"
     t.integer  "glassdoor_rating"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "title"
     t.text     "description"
     t.integer  "points",               default: 1
     t.integer  "priority",             default: 1
-    t.string   "next_task"
+    t.string   "next_task",            default: "Find Advocate"
     t.boolean  "archived",             default: false
   end
 

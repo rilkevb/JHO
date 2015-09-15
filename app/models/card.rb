@@ -8,6 +8,15 @@ class Card < ActiveRecord::Base
   validates :list_id, presence: true, numericality: { only_integer: true }
   validates :title, presence: true, length: { minimum: 3 }
 
+  after_create :generate_tasks
+
+  def generate_tasks
+    tasks = ["Find advocate", "Contact advocate for meeting", "Apply to company", "Follow up with hiring manager about application"]
+    tasks.each do |title|
+      self.tasks.create(title: title)
+    end
+  end
+
   # schema attributes
   # :list_id,
   # :organization_name,
