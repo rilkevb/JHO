@@ -3,8 +3,10 @@ class MovementsController < ApplicationController
     card = Card.where(id: params[:card_id]).first
     # change card.list_id to the new list
     card.update(list_id: params[:card][:list_id])
-    # set priority score based on that
+    # set priority score based on the card's new list
     card.recalculate_priority
+    # assign next task based on card's list & other completed tasks
+    card.set_next_task
 
     # create movement with the name of the card's now current list
     movement = Movement.new(card_id: card.id, current_list: card.list.name)

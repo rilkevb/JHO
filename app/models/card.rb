@@ -8,6 +8,21 @@ class Card < ActiveRecord::Base
   validates :list_id, presence: true, numericality: { only_integer: true }
   validates :title, presence: true, length: { minimum: 3 }
 
+  after_create :generate_tasks
+
+  def generate_tasks
+    # investigate better way to do this dynamically
+    tasks = ["Find advocate", "Contact advocate for meeting", "Apply to company", "Follow up with hiring manager about application", "Review for interview", "Send thank you email"]
+    tasks.each do |title|
+      self.tasks.create(title: title)
+    end
+  end
+
+  def set_next_task
+    task = self.tasks[list.position_id]
+    self.update(next_task: task.title)
+  end
+
   def recalculate_priority
     case self.list.position_id
     when 0
@@ -24,10 +39,6 @@ class Card < ActiveRecord::Base
       self.update(priority: 3) # Interview
     end
     # Will need to extend this later if we want more lists.
-  end
-
-  def set_next_task
-    # pending
   end
 
   # schema attributes
