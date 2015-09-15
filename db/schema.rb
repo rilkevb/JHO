@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20150915011113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_keys", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "board_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "board_id"
