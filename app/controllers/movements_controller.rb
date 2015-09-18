@@ -14,7 +14,8 @@ class MovementsController < ApplicationController
       render json: { movement: movement, card: card } , status: 200
     else
       render json: { errors:
-                     {  current_list: "current_list parameter can't be blank and must contain 3 or more characters" }
+                     {  card_id: "card with card_id #{card_id} could not be found",
+                        current_list: "current_list parameter can't be blank and must contain 3 or more characters" }
                      }, status: 422
     end
   end
