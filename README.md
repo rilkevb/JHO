@@ -1,6 +1,6 @@
 # JHO 
 
-*Your job hunt, organized.*
+*Your job hunt, organized.* See the Angular client repository [here](https://github.com/rilkevb/JHO_Angular_Experimentation).
 
 [![Circle CI](https://circleci.com/gh/mtvillwock/jho.svg?style=svg&circle-token=:61c1a903f8b4b59801920e70480195dbc7295f69)](https://circleci.com/gh/mtvillwock/jho)
 
@@ -22,7 +22,6 @@ Built with love using:
 
 - [Ruby on Rails](http://rubyonrails.org/)
 - [AngularJS](https://angularjs.org/)
-- [SASS](http://sass-lang.com/)
 - [Heroku](https://heroku.com/)
 
 Configuration Settings and Use:
