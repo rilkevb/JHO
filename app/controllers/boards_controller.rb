@@ -8,12 +8,11 @@ class BoardsController < ApplicationController
   end
 
   def dashboard
-
-    board = @current_user.boards.first
-    lists = board.lists
-    cards = lists.map { |list| list.cards } # collection of collection of cards
-    flat_cards = cards.flatten!
-    ap tasks = flat_cards.map { |card| card.tasks }
+    board = @current_user.boards.first # Board object
+    lists = board.lists # ActiveRecord collection of List objects
+    cards = lists.map { |list| list.cards } # AR collection of AR collections of cards
+    flat_cards = cards.flatten! # single AR collection of all cards
+    tasks = flat_cards.map { |card| card.tasks } # AR collection of AR collection of tasks
 
     # create a hash of the board's attributes
     board_hash = board.attributes
@@ -24,9 +23,37 @@ class BoardsController < ApplicationController
       board_hash["lists"] << list.attributes
       board_hash["lists"][index]["cards"] = list.cards
       cards.each_with_index do |card, i|
-        board_hash["lists"][index]["cards"][i]["tasks"] = card.tasks
+        ap card
+        ap i
+        board_hash["lists"][index]["cards"][i]["tasks"] = []
+        board_hash["lists"][index]["cards"][i]["tasks"] << card.tasks
       end
     end
+
+    # { # board
+    #   lists: [ #board["lists"]
+    #     { name: "Something", # boards["lists"][0]
+    #       cards: [ # boards["lists"][0]["cards"]
+    #         { name: "Card", # boards["lists"][0]["cards"][0]
+    #           tasks: [ # boards["lists"][0]["cards"][0]["tasks"]
+    #             { title: "do it now"}, # boards["lists"][0]["cards"][0]["tasks"][0]
+    #             { title: "do it again"}
+    #           ]
+    #           }
+    #       ]
+    #       },
+    #     { name: "Other",
+    #       cards: [
+    #         { name: "New Card",
+    #           tasks: [
+    #             { title: "Say what"},
+    #             { title: "Say what again"}
+    #           ]
+    #           }
+    #       ]
+    #       }
+    #   ]
+    # }
 
     # refactoring for efficiency
     # board.lists.include(:cards).to_json
