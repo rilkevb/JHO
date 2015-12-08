@@ -4,6 +4,16 @@
 
 [![Circle CI](https://circleci.com/gh/mtvillwock/jho.svg?style=svg&circle-token=:61c1a903f8b4b59801920e70480195dbc7295f69)](https://circleci.com/gh/mtvillwock/jho)
 
+## Test Drive
+
+1. `git clone https://github.com/mtvillwock/JHO.git` - clone down local copy of API
+1. `cd JHO` - change directory
+2. `bundle install` - install gems / dependencies
+3. `rake db:create` - create database
+4. `rake db:migrate` - migrate database tables
+3. `rails s` - start server
+4. Use the [client repo](https://github.com/mtvillwock/JHO_Angular_Experimentation) to interact with the API.
+
 ## Implemented:
 
 - Rails API [deployed](https://jho.herokuapp.com) on Heroku
