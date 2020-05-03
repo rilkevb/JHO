@@ -4,6 +4,8 @@
 
 [![Circle CI](https://circleci.com/gh/mtvillwock/jho.svg?style=svg&circle-token=:61c1a903f8b4b59801920e70480195dbc7295f69)](https://circleci.com/gh/mtvillwock/jho)
 
+![JHO screenshot](./dbc-mixer-jho.png)
+
 ## Test Drive
 
 1. `git clone https://github.com/mtvillwock/JHO.git` - clone down local copy of API
