@@ -15,7 +15,8 @@
 /log/*.log
 /tmp
 
-# Ignore .env (ENV variables), coverage (SimpleCov), .DS_Store
+# Ignore .env (ENV variables), coverage (SimpleCov), .DS_Store, heroku
 .env
 coverage/
 .DS_Store
+heroku.txt
